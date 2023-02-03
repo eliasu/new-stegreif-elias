@@ -1,0 +1,72 @@
+<!-- /who_we_are.antlers.html -->
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('modal', {
+            open: false,
+            title: "Headline",
+            description: "Description …",
+            showFunFact: false,
+            funFact: "Hier ein Fun Fact aus dem Store",
+            showLinks: false,
+            links: [],
+            teamTags: [],
+            image: {},
+        })
+        Alpine.store('filters', {
+            titles: [],
+        })
+    });
+
+    function setup() {
+        var allButtons = document.querySelectorAll('[data-filter]');
+        var allFilters = [];
+
+        for (let index = 0; index < allButtons.length; index++) {
+            var temp = allButtons[index].innerText;
+            allFilters.push( temp.toLowerCase() );
+        }
+        
+        return allFilters;
+    }
+
+    function toggle(buttonid) {
+        console.log( buttonid )
+    }
+</script>
+
+
+{{# lade alle angezeigten filter values in den Alpine Store #}}
+<main x-data x-init="$store.filters.titles = setup()" @keyup.escape="$store.modal.open = false" class="relative w-full" id="content"> 
+    
+    {{ partial:components/orchestra_modal  }}
+    
+    {{# Header #}}
+    {{ partial:components/header social_icons="true" }}
+
+    {{# Intro Section #}}
+    {{ partial:layout/section color="{ select_section_theme_intro }" }}
+        
+        {{# Introduction Content Bard #}}
+        {{ partial:components/bard handle="{ introduction_content }" }}
+
+    {{ /partial:layout/section }}
+
+    {{# Orchestra Section #}}
+    {{ partial:layout/section color="{ select_section_theme_orchestra }" }}
+        
+        {{# Orchestra list #}}
+        {{ partial:components/orchestra_block :headline="section_headline_orchestra" }}
+        
+    {{ /partial:layout/section }}
+    
+
+    {{# if there is additional content #}}
+    {{ add_section }}
+        {{ partial:layout/section color="{ theme_selector }" }}
+            {{ partial:components/bard handle="{ article }" }}
+        {{ /partial:layout/section }}
+    {{ /add_section }}
+    
+</main>
+<!-- End: /who_we_are.antlers.html -->

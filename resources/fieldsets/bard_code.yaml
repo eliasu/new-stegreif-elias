@@ -1,0 +1,12 @@
+title: bard_code
+fields:
+  -
+    handle: code
+    field:
+      antlers: false
+      display: Code
+      type: textarea
+      icon: textarea
+      listable: hidden
+      instructions_position: above
+      read_only: false

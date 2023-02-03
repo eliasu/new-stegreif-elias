@@ -1,0 +1,8 @@
+{{#
+	@name h4
+	@desc The typography h4 partial to render an h4 with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<!-- /typography/_h4.antlers.html -->
+<{{ as or 'h4' }} {{ class ?= 'class="{class}"' }} {{ slot }}>{{ content | nl2br }}</{{ as or 'h4' }}>
+<!-- End: /typography/_h4.antlers.html -->

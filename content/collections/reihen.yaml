@@ -1,0 +1,15 @@
+title: Reihen
+sites:
+  - de
+  - en
+propagate: true
+template: single_page
+layout: layout
+taxonomies:
+  - tags
+revisions: false
+route: '/reihe/{slug}'
+sort_dir: asc
+date_behavior:
+  past: public
+  future: private

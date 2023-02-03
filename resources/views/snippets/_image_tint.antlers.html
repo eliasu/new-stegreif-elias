@@ -1,0 +1,19 @@
+{{#
+	@name Image Tint helper
+#}}
+
+<!-- /snippets/_image_tint.antlers.html -->
+{{ if tint === "dark" }}
+    <div class="pointer-events-none absolute inset-0 bg-darkblue mix-blend-color {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+    <div class="pointer-events-none absolute inset-0 bg-green mix-blend-multiply {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+    <div class="pointer-events-none absolute inset-0 bg-darkblue mix-blend-lighten {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+{{ elseif tint === "yellow" }}
+    <div class="pointer-events-none absolute inset-0 bg-darkblue mix-blend-color {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+    <div class="pointer-events-none absolute inset-0 bg-yellow mix-blend-multiply {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+    <div class="pointer-events-none absolute inset-0 bg-darkblue mix-blend-lighten {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+{{ elseif tint === "light" }}
+    <div class="pointer-events-none absolute inset-0 bg-darkblue mix-blend-color {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+    <div class="pointer-events-none absolute inset-0 bg-light mix-blend-multiply {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+    <div class="pointer-events-none absolute inset-0 bg-darkblue mix-blend-lighten {{ tint_hover ?= "group-hover:opacity-0 motion-safe:transition-opacity" }}"></div>
+{{ /if }}
+<!-- End: /snippets/_image_tint.antlers.html -->

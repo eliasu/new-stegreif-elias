@@ -2,3 +2,4 @@
 @import "custom";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import 'plyr/dist/plyr.css';

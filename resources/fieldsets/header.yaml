@@ -1,0 +1,69 @@
+title: Header
+fields:
+  -
+    handle: hero_section
+    field:
+      display: 'Hero Section'
+      type: section
+      icon: section
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: header_headline
+    field: common.text_single
+    config:
+      display: 'Header Headline'
+      width: 50
+      instructions: 'Falls back to the title if left empty.'
+      placeholder: 'Leave empty to inherit the title field'
+  -
+    handle: header_theme_selector
+    field: common.theme_selector
+    config:
+      options:
+        dark: Dark
+        yellow: Yellow
+        light: Light
+        disable: Disable
+      display: 'Select Header Theme'
+      width: 50
+  -
+    handle: header_select
+    field:
+      options:
+        image: Image
+        video: Video
+      multiple: false
+      clearable: false
+      searchable: true
+      taggable: false
+      push_tags: false
+      cast_booleans: false
+      default: image
+      display: 'Select Header Media'
+      type: select
+      icon: select
+      width: 50
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: header_image
+    field: common.image
+    config:
+      display: 'Header Image'
+      width: 50
+      folder: header_images
+      if:
+        header_select: 'not video'
+  -
+    handle: header_video
+    field: common.youtube_url
+    config:
+      display: 'Header Video'
+      width: 50
+      if:
+        header_select: 'equals video'
+  -
+    import: quicklinks

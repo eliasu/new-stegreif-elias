@@ -7,7 +7,7 @@
         }}
     "
     :aria-invalid="errors.hasOwnProperty('{{ handle }}')"
-    aria-describedBy="{{ handle }}"
+    :aria-describedBy="id"
 >
     {{ foreach:options as="value|label" }}
         <label class="inline-flex items-center">

@@ -1,0 +1,203 @@
+hide: true
+title: Home
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          localizable: true
+          listable: true
+          display: 'Page Title'
+          validate:
+            - required
+          instructions_position: above
+          read_only: false
+          antlers: false
+      -
+        import: header
+      -
+        handle: introduction_section
+        field:
+          display: 'Introduction Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: select_section_theme_intro
+        field: section.theme_selector
+      -
+        handle: introduction_content
+        field: article.article
+        config:
+          buttons:
+            - bigger
+            - smaller
+            - h2
+            - h3
+            - h4
+            - h5
+            - accent
+            - removeformat
+            - anchor
+            - bold
+            - italic
+            - underline
+          display: 'Introduction Content'
+          validate:
+            - required
+      -
+        handle: headline_dates
+        field: common.text_single
+        config:
+          display: 'Headline Dates'
+          validate:
+            - required
+          width: 50
+      -
+        handle: all_dates_page
+        field: common.entry
+        config:
+          localizable: false
+          display: 'All Dates Page'
+          width: 50
+          collections:
+            - pages
+      -
+        handle: headline_news
+        field: common.text_single
+        config:
+          display: 'Headline News'
+          validate:
+            - required
+          width: 50
+      -
+        handle: all_news_page
+        field: common.entry
+        config:
+          localizable: false
+          display: 'All News Page'
+          width: 50
+          collections:
+            - pages
+      -
+        handle: current_productions_section
+        field:
+          display: 'Current Productions Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: select_section_theme_current_production
+        field: section.theme_selector
+        config:
+          width: 50
+      -
+        handle: related_productions
+        field: common.entry
+        config:
+          max_items: 6
+          localizable: false
+          display: 'Related Productions'
+          create: false
+          collections:
+            - programme
+            - reihen
+          width: 50
+      -
+        handle: headline_productions
+        field: common.text_single
+        config:
+          display: 'Headline Current Productions'
+          validate:
+            - required
+          width: 50
+      -
+        handle: all_productions_page
+        field: common.entry
+        config:
+          localizable: false
+          display: 'All Productions Page'
+          width: 50
+          collections:
+            - pages
+      -
+        handle: support_us_section
+        field:
+          display: 'Support Us Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: select_section_theme_support_us
+        field: section.theme_selector
+      -
+        handle: support_us_content
+        field: article.article
+        config:
+          buttons:
+            - h2
+            - h3
+            - h4
+            - h5
+            - h6
+            - accent
+            - bigger
+            - removeformat
+            - anchor
+            - bold
+            - italic
+            - underline
+          display: 'Support Us Content'
+          validate:
+            - required
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+          generate: true
+          listable: hidden
+          display: Slug
+          validate:
+            - required
+            - 'unique_entry_value:{collection},{id},{site}'
+      -
+        import: select_transition_theme
+      -
+        handle: parent
+        field:
+          type: entries
+          collections:
+            - pages
+          max_items: 1
+          listable: false
+          localizable: true
+      -
+        handle: template
+        field:
+          default: home
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false

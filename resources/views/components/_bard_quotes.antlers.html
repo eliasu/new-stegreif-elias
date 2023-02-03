@@ -1,0 +1,20 @@
+{{#
+	@name bard_quotes
+	@desc The bard_quotes component.
+    @set page.article.bard_quotes
+#}}
+
+<!-- /components/_bard_quotes.antlers.html -->
+<div class="flex flex-col items-start gap-4 py-8 md:py-16 not-prose block-in-0">
+    
+    {{ if author }}
+        {{ partial:typography/tag content="{ author }" color="base" }}
+    {{ /if }}
+
+    {{ if size == "small" }} 
+        {{ partial:typography/h3 content="{ quote ensure_left="»" ensure_right="«" }" class="text-skin-primary block-size-2" }}
+    {{ else }} 
+        {{ partial:typography/h2 content="{ quote ensure_left="»" ensure_right="«" }" class="text-skin-primary" }}    
+    {{ /if }}
+</div>
+<!-- End: /components/_bard_quotes.antlers.html -->

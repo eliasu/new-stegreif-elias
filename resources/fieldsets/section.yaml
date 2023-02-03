@@ -1,0 +1,9 @@
+title: Section
+fields:
+  -
+    handle: theme_selector
+    field: common.theme_selector
+    config:
+      display: 'Select Section Theme'
+  -
+    import: article

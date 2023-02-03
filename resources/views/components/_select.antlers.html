@@ -1,0 +1,24 @@
+<!-- /components/_select.antlers.html -->
+{{ if label }}
+    <div :class="{{model}} ? 'text-skin-primary' : 'text-skin-base'" class="relative flex items-center max-w-full gap-4 cursor-pointer pointer-events-auto hover:text-skin-accent group">
+        
+        <select x-model="{{model}}" class="h-8 py-0 pl-2 pr-10 m-0 text-base font-extrabold uppercase bg-transparent border-none cursor-pointer pointer-events-auto md:text-lg md:text bg-none whitespace-nowrap motion-safe:transition leading-s focus:outline-none focus-visible:outline-none focus:ring-0"
+            {{ !faux ?= { partial:snippets/button_attributes } }}
+        >
+
+            {{# start item not selectable #}}
+            <option value="" selected>{{ label }}</option>
+            
+            {{# select items #}}
+            {{ slot }}
+        
+        </select>
+        
+        {{# icon #}}
+        {{ svg src="arrow_down" :class="{{model}} ? 'fill-current' : 'fill-skin-base'" class="absolute right-0 w-6 h-4 pointer-events-none fill-current motion-safe:transition-colors md:w-8 md:h-6" alt="open dropdown" }}
+
+        {{# underline #}}
+        <div :class="{{model}} ? 'bg-skin-primary' : 'bg-skin-base'" class="h-0.5 motion-safe:transition-all group-hover:bg-skin-accent absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+    </div>
+{{ /if }}
+<!-- End: /components/_select.antlers.html -->

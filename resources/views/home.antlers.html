@@ -1,0 +1,40 @@
+<!-- /home.antlers.html -->
+{{# start counting the transitions #}}
+{{ transition_counter = 0 }} {{ start_number = ['0', '1', '2', '3', '4', '5'] }} 
+{{ start_number | shuffle }} {{ if index == 0 }} {{ transition_counter = value}} {{ /if }} {{ /start_number }}
+
+<main class="relative w-full" id="content"> 
+
+    {{# Header #}}
+    {{ partial:components/header social_icons="true" }}
+
+    {{# intruduction section #}}
+    {{ partial:layout/section color="{ select_section_theme_intro }" }}
+        
+        {{# intruduction bard #}}
+        {{ partial:components/bard handle="{introduction_content}" }}
+        
+        {{# next dates block #}}
+        {{ partial:components/next_dates_block show="6" }}
+        
+        {{# all news block #}}
+        {{ partial:components/news_block show_header="true" show="3" }}
+
+    {{ /partial:layout/section }}
+    
+    {{# current productions section #}}
+    {{ partial:layout/section color="{ select_section_theme_current_production }" }} 
+
+        {{# current productions block #}}
+        {{ partial:components/next_productions_block }}
+
+    {{ /partial:layout/section }}
+    
+    {{# support us section #}}
+    {{ partial:layout/section color="{ select_section_theme_support_us }" }}
+        
+        {{ partial:components/bard handle="{support_us_content}" }}
+
+    {{ /partial:layout/section }}
+</main>
+<!-- End: /home.antlers.html -->

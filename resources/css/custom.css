@@ -1,13 +1,375 @@
 /* If you don't want to use the JS in CSS syntax from `tailwind.config.site.js` you can add your own custom CSS here. Use different layers to make sure your CSS either get's purged or not: https://tailwindcss.com/docs/functions-and-directives#layer. CSS in the base layer won't get purged. */
+:root {
+    /* Brand Colors */
+    --color-darkblue: 2 1 34;
+    --color-blue: 3 2 51;
+    --color-yellow: 255 189 66;
+    --color-green: 60 136 126;
+    --color-light: 245 241 235;
+
+    /* Utility Colors */
+    --color-black: 2 1 34;
+    --color-white: 245 241 235; 
+
+    /* Theming Colors */
+    --color-base: var(--color-light);
+    --color-inverted: var(--color-darkblue);
+    --color-primary: var(--color-yellow);
+    --color-accent: var(--color-green);
+    
+    --plyr-color-main: rgb(255, 189, 66);
+}
+
 
 @layer base {
 
-}
+   
+
+    /* coloring */
+    p, h1, h2, h3, h4, h5, h6, strong, em, span, u  {
+        @apply text-skin-base decoration-skin-primary;
+    }
+    
+    /* coloring plus */
+    h1, h2, h3, h4  {
+        @apply font-extrabold uppercase leading-s;
+    }
+    
+    /* text sizes responsive */
+    p   { @apply text-base md:text-lg leading-l motion-safe:transition-colors; } 
+    h1  { @apply text-4xl xs:text-5xl md:text-7xl lg:text-8xl motion-safe:transition-colors; }
+    h2  { @apply text-3xl sm:text-4xl md:text-5xl xl:text-6xl motion-safe:transition-colors; hyphens: auto;}
+    h3  { @apply text-2xl md:text-3xl xl:text-4xl motion-safe:transition-colors; hyphens: auto;}
+    h4  { @apply text-lg md:text-2xl motion-safe:transition-colors; }
+    h5  { @apply text-base font-bold md:text-2xl leading-s motion-safe:transition-colors; }
+    h6  { @apply text-xs font-bold uppercase leading-s motion-safe:transition-colors; } 
+    
+    .prose > *:first-child { @apply !mt-0 }
+    .prose > *:last-child { @apply mb-0; }
+    
+    /* prose spacing */
+    .prose > p   { @apply block-in-2 block-size-1; }
+    .prose > h2  { @apply mt-8 mb-4 md:mt-16 md:mb-6 block-in-0 block-size-0; } 
+    .prose > h3  { @apply mt-10 block-in-1 block-size-2; } 
+    .prose > h4  { @apply mt-4 block-in-1 block-size-2; } 
+    .prose > h5  { @apply mt-4 block-in-2 block-size-1; }
+    
+    /* link coloring */
+    p > a, p > a > * { @apply underline motion-safe:transition text-skin-primary decoration-skin-primary hover:text-skin-accent hover:decoration-skin-accent focus:prose-a:outline-none focus-visible:prose-a:ring focus-visible:prose-a:ring-skin-primary focus-visible:prose-a:rounded-sm;}
+}   
+
+
 
 @layer components {
+    
+    .block-full  { @apply -mx-4 lg:-mx-20; }
+    
+    .block-in-0 { @apply pl-0 sm:pl-5 lg:pl-8 xl:pl-20 sm:pr-10 md:pr-20 }
+    .block-in-1 { @apply pl-0 sm:pl-6 lg:pl-16 xl:pl-30 sm:pr-10 md:pr-20 }
+    .block-in-2 { @apply pl-0 sm:pl-10 lg:pl-24 xl:pl-40 sm:pr-10 md:pr-20 }
+    
+    .block-size-0 { @apply lg:max-w-[70rem] }
+    .block-size-1 { @apply lg:max-w-[60rem] }
+    .block-size-2 { @apply lg:max-w-[50rem] }
+    .block-size-full-1 { @apply lg:max-w-[64rem] w-full md:pr-16 }
+    
+    /* hack for sidebar */
+    .block-inset-reset > .block-in-1, 
+    .block-inset-reset > .block-in-2, 
+    .block-inset-reset > .block-full { @apply px-0; }
 
+    .svg-hover-right {
+        @apply [&>svg]:hover:translate-x-0.5 [&>svg]:motion-safe:transition-transform;
+    }
+    .svg-hover-left {
+        @apply [&>svg]:hover:-translate-x-0.5 [&>svg]:motion-safe:transition-transform;
+    }
 }
 
 @layer utilities {
+   
+}
 
+
+
+
+
+/* burger menu animation */
+.open-burger > div:nth-child(1) {
+    @apply rotate-45 translate-x-[0.357rem] -translate-y-[0.175rem] w-10;
+}
+
+.open-burger > div:nth-child(2) {
+    @apply w-[0%] opacity-0;
+}
+
+.open-burger > div:nth-child(3) {
+    @apply -rotate-45 translate-x-[0.357rem] translate-y-[0.175rem] w-10;
+}
+
+
+
+/*  nedded for alpine.js */
+[x-cloak] { display: none; }
+
+
+/* feature left and right */
+.feature-left > div {
+    @apply flex-col-reverse sm:flex-row;
+}
+
+.feature-right > div {
+    @apply flex-col-reverse sm:flex-row-reverse;
+}
+
+.alternating:nth-child(odd) > div {
+    @apply bg-yellow;
+}
+
+/* theming via css variables */
+.theme-dark {
+    --color-base: var(--color-light);
+    --color-inverted: var(--color-darkblue);
+    --color-primary: var(--color-yellow);
+    --color-accent: var(--color-green);
+}
+.theme-yellow {
+    --color-base: var(--color-darkblue);
+    --color-inverted: var(--color-yellow);
+    --color-primary: var(--color-green);
+    --color-accent: var(--color-light);
+}
+section.theme-yellow {
+    background-image: url(/site_assets/bg/bg_section_birds.svg);
+    background-repeat: repeat;
+    background-size: 85rem;
+}
+
+.theme-light {
+    --color-base: var(--color-darkblue);
+    --color-inverted: var(--color-light);
+    --color-primary: var(--color-green);
+    --color-accent: var(--color-yellow);
+}
+section.theme-light {
+    background-image: url(/site_assets/bg/bg_section_birds.svg);
+    background-repeat: repeat;
+    background-size: 85rem;
+}
+
+
+/* Themes Header */
+.header-dark {
+    --color-base: var(--color-light);
+    --color-inverted: var(--color-darkblue);
+    --color-primary: var(--color-yellow);
+    --color-accent: var(--color-green);
+}
+.header-yellow {
+    --color-base: var(--color-green);
+    --color-inverted: var(--color-darkblue);
+    --color-primary: var(--color-light);
+    --color-accent: var(--color-yellow);
+}
+.header-light {
+    --color-base: var(--color-yellow);
+    --color-inverted: var(--color-darkblue);
+    --color-primary: var(--color-light);
+    --color-accent: var(--color-green);
+}
+
+
+
+
+
+/* style the lightbox */
+.fslightbox-slide-number-container {
+    @apply !hidden; 
+}
+
+.fslightbox-toolbar-button, .fslightbox-slide-btn {
+    @apply !bg-yellow !text-darkblue;
+}
+
+.fslightbox-toolbar-button > svg > path, .fslightbox-slide-btn > svg > path {
+    @apply fill-darkblue;
+}
+
+
+
+
+/* style the videojs */
+.vjs-big-play-button {
+    @apply !bg-yellow !transition hover:!bg-green !w-12 !h-12 !border-none !rounded-none !top-[calc(50%-1rem)] !left-[calc(50%-2.5rem)];
+}
+.vjs-icon-placeholder::before {
+    @apply !flex justify-center items-center !text-light;
+
+
+
+}
+
+/* bg image mask for background images */
+.rad-mask {
+    mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 0%, transparent 50%);
+    @apply translate-x-[20%] opacity-60;
+}
+
+.rad-mask-2 {
+    mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 0%, transparent 50%);
+    @apply -translate-x-[20%] opacity-60;
+}
+
+
+
+
+/* all section transition related styles including bird masks  */
+.bird-mask-0{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/birds_0.png"); }
+.bird-mask-1{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/birds_1.png"); }
+.bird-mask-2{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/birds_2.png"); }
+.bird-mask-3{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/birds_3.png"); }
+.bird-mask-4{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/birds_4.png"); }
+.bird-mask-5{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/birds_5.png"); }
+
+.bechange-mask-0{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/bechange_0.png"); }
+.bechange-mask-1{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/bechange_1.png"); }
+.bechange-mask-2{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/bechange_2.png"); }
+.bechange-mask-3{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/bechange_3.png"); }
+.bechange-mask-4{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/bechange_4.png"); }
+.bechange-mask-5{ mask-image: url("/site_assets/transitions/black.png"), url("/site_assets/transitions/bechange_5.png"); }
+
+/* only image masks */
+.bird-mask, .bechange-mask {
+    mask-size: 100% calc(100% - 22rem + 1px), auto 22rem;
+    mask-position: center top, center bottom;
+    mask-repeat: repeat-x;
+}
+
+.bird_image_mask { 
+    mask-image: url("/site_assets/transitions/birds_image.png"); 
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    mask-position: left top;
+}
+
+ /* transition section */
+.bird-section:not(:last-of-type), .bechange-section:not(:last-of-type)
+{
+    @apply bg-skin-inverted;
+    mask-size: 100% calc(100% - 22rem + 1px), auto 22rem;
+    mask-position: center top, center bottom;
+    mask-repeat: repeat-x;
+    
+    margin-top: -22rem;
+    padding-top: calc(22rem + 5rem);
+    padding-bottom: calc(22rem + 10rem);
+}
+
+/* last section */
+.bird-section:last-of-type, .bechange-section:last-of-type
+{
+    @apply bg-skin-inverted;
+    margin-top: -22rem;
+    padding-top: calc(22rem + 5rem);
+    padding-bottom: 15rem; 
+}
+
+/* for filter buttons */
+.active > * {
+    @apply text-skin-primary;
+}
+
+/* to hyphen specific elements like buttons */
+.hyphens {
+    hyphens: auto;
+}
+
+
+
+
+/* set z-index of sections according to order  */
+section:nth-of-type(2) { @apply z-90 }
+section:nth-of-type(3) { @apply z-80 }
+section:nth-of-type(4) { @apply z-70 }
+section:nth-of-type(5) { @apply z-60 }
+section:nth-of-type(6) { @apply z-50 }
+section:nth-of-type(7) { @apply z-40 }
+section:nth-of-type(8) { @apply z-30 }
+section:nth-of-type(9) { @apply z-20 }
+section:nth-of-type(10) { @apply z-10 }
+
+
+
+
+/* Regular */
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/site_assets/fonts/PlusJakartaSans-Regular.woff2') format('woff2'),
+        url('/site_assets/fonts/PlusJakartaSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Regular Italic */
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/site_assets/fonts/PlusJakartaSans-Italic.woff2') format('woff2'),
+        url('/site_assets/fonts/PlusJakartaSans-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Bold*/
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/site_assets/fonts/PlusJakartaSans-Bold.woff2') format('woff2'),
+        url('/site_assets/fonts/PlusJakartaSans-Bold.woff') format('woff');
+    font-weight: 700;    
+    font-style: normal;
+    font-display: swap;
+}    
+
+/* Bold Italic */
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/site_assets/fonts/PlusJakartaSans-BoldItalic.woff2') format('woff2'),
+        url('/site_assets/fonts/PlusJakartaSans-BoldItalic.woff') format('woff');
+    font-weight: 700;    
+    font-style: italic;
+    font-display: swap;
+}    
+
+/* Extra Bold */
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/site_assets/fonts/PlusJakartaSans-ExtraBold.woff2') format('woff2'),
+        url('/site_assets/fonts/PlusJakartaSans-ExtraBold.woff') format('woff');
+    font-weight: 800;    
+    font-style: normal;
+    font-display: swap;
+}    
+
+/* Extra Bold Italic */
+@font-face {
+font-family: 'Plus Jakarta Sans';
+src: url('/site_assets/fonts/PlusJakartaSans-ExtraBoldItalic.woff2') format('woff2'),
+url('/site_assets/fonts/PlusJakartaSans-ExtraBoldItalic.woff') format('woff');
+font-weight: 800;
+font-style: italic;
+font-display: swap;
+}
+
+
+
+/* hannes custom */
+.custom-hidden {
+    opacity: 0;
+    transition: opacity 0ms !important;
+}
+
+#stgrf_logo.fade-in {
+    opacity: 1;
+    
 }

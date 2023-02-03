@@ -1,0 +1,15 @@
+disable_telephone_detection: false
+disable_email_detection: false
+disable_address_detection: false
+use_theme_color: false
+use_theme_color_dark_mode: false
+apple_mobile_web_app: false
+apple_status_bar_black: false
+android_mobile_web_app: false
+use_favicons: true
+svg: favicon.svg
+safari_color: '#FFBD42'
+ios_color: '#FFBD42'
+safari_mask_icon: favicon.svg
+apple_touch_icon: ios-mask-icon.png
+android_chrome: android-mask-icon.png

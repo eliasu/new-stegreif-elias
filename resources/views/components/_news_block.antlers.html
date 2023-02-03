@@ -1,0 +1,52 @@
+{{#
+	@name news block
+	@desc The news block component.
+
+    @ parameters 
+        show_header (bool - shows headline and "all news" link)
+        show (int - limits the displayed items falls back to unlimited)
+#}}
+
+<!-- /components/_news_block.antlers.html -->
+<div class="relative flex flex-col fluid-container">
+            
+    {{# block header with lin to all dates #}}
+    {{ if show_header }}
+        <div class="flex flex-row flex-wrap items-center justify-between mb-20 md:px-12 gap-y-4 gap-x-8 lg:px-20">
+            {{ partial:typography/h3 :content="headline_news" class="text-skin-primary" }}
+            {{ partial:components/button label="{ trans:strings.all_news }" link_type="entry" :entry="all_news_page" }}
+        </div>
+    {{ /if }}
+
+    {{# news cards grid wrapper #}}
+    <div class="grid grid-cols-1 md:px-12 gap-x-12 xs:grid-cols-2 xl:grid-cols-3 gap-y-20 2xl:gap-x-20 lg:px-20">
+        
+        {{# all news #}}
+        {{ collection:neuigkeiten limit="{show}" sort="date:desc" }}
+            <div class="flex flex-col items-start">
+
+                {{# date tag #}}
+                {{ partial:typography/tag color="light" content={ date iso_format="DD.MM.YYYY" } class="mb-4" }}
+                
+                {{# headline or title fallback #}}
+                {{ partial:typography/h4 content="{ title }" class="mb-6 hyphens text-skin-primary" }}
+                
+                {{# teaser text #}}
+                {{ partial:typography/p content="{ teaser_text }" class="mb-6" }}
+
+                {{# link to detail view #}}
+                {{ partial:components/button button_type="lined_base" label="{ trans:strings.read_more }" link_type="url" entry="{ url }" }}
+                
+            </div>
+        {{ /collection:neuigkeiten }}
+
+    </div>
+    {{# background media #}}
+    <div class="absolute inset-x-0 pointer-events-none -inset-y-40 z-behind rad-mask">
+            
+        {{# background image #}}
+        {{ partial:components/picture nocaption="true" image="/site_assets/bg/download2.jpg" tint="dark" cover="true" sizes="(min-width: 768px) 100vw, 100vw" }}
+        {{# <img src="/site_assets/logos/logo_for_{{ header_theme_selector }}.png" class="absolute -top-6 left-4 lg:top-6 lg:left-20" alt="{{ config:app:name }}"/> #}}
+    </div>
+</div>
+<!-- End: /components/_news_block.antlers.html -->

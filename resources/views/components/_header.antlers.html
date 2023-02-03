@@ -1,0 +1,64 @@
+<!-- /components/_header.antlers.html -->
+
+{{# start counting the transitions #}}
+{{ transition_counter = 0 }} {{ start_number = ['0', '1', '2', '3', '4', '5'] }} 
+{{ start_number | shuffle }} {{ if index == 0 }} {{ transition_counter = value}} {{ /if }} {{ /start_number }}
+
+{{ if header_theme_selector != "disable" }}
+    <section class="{{ header_theme_selector | ensure_left:"header-" }} overflow-hidden flex flex-col relative z-front h-header">
+        
+        
+        {{# header content wrapper #}}
+        <div class="relative flex flex-col justify-end h-screen gap-10 py-4 lg:py-20 fluid-container">
+            
+            {{# logo #}}
+            <a href="{{ site:url }}">
+
+                <img src="/site_assets/logos/logo_for_{{ header_theme_selector }}.png" class="absolute top-2 left-4 lg:top-6 lg:left-20" alt="{{ config:app:name }}"/>
+            </a>
+            
+            {{# title and tag #}}
+            <div class="flex flex-col gap-4">
+                {{# tags if needed #}}
+                {{ if blueprint == "termine" || blueprint == "reihen" || blueprint == "programme" || blueprint == "neuigkeiten" }}
+                    {{ partial:components/tags }}
+                {{ /if }}
+                
+                {{# header headline #}}
+                {{ partial:typography/h1 content="{header_headline ?? title }" class="text-skin-primary"}}
+            </div>
+
+            {{# quicklinks_section component #}}
+            {{ partial:components/quicklinks_section }}
+            
+        </div>
+        
+        {{# background media #}}
+        <div class="absolute inset-0 pointer-events-none {{ select_transition_theme | ensure_right:"-mask" }} {{ select_transition_theme | ensure_right:"-mask-{ transition_counter }" }} z-behind">
+            
+            {{# background image #}}
+            {{ if header_select == "image" }}
+                {{ partial:components/picture nocaption="true" :image="header_image" tint="{{ header_theme_selector }}" cover="true" sizes="(min-width: 768px) 100vw, 100vw" }}
+            
+            {{# background video #}}
+            {{ elseif header_select == "video" }}
+                {{ partial:components/video :youtube_url="header_video" tint="{{ header_theme_selector }}" cover="true" }}
+            {{ /if }}
+            
+        </div>
+    </section>
+
+    {{# disabled header #}}
+{{ else }}
+    <section class="{{ theme_selector | ensure_left:"theme-" }} overflow-hidden w-full flex items-end relative z-front pt-60 mb-15 lg:pt-80 md:mb-20 bg-skin-inverted">
+            
+            {{# logo #}}
+            <div class="absolute inset-0 pointer-events-none fluid-container">
+                <img src="/site_assets/logos/logo_for_{{ theme_selector }}.png" class="absolute -top-6 left-4 lg:top-6 lg:left-20" alt="{{ config:app:name }}"/>
+            </div> 
+            {{# header headline #}}
+            {{ partial:typography/h1 content="{header_headline ?? title }" class="text-skin-primary fluid-container"}}
+    </section>
+{{ /if }}
+<!-- End: /components/_header.antlers.html -->
+

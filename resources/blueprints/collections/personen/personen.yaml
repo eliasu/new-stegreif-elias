@@ -1,0 +1,70 @@
+title: Personen
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          listable: true
+          display: Title
+          validate:
+            - required
+      -
+        handle: thumbnail
+        field: common.image
+        config:
+          display: Thumbnail
+          localizable: false
+          folder: personen
+          width: 50
+      -
+        handle: image
+        field: common.image
+        config:
+          localizable: false
+          folder: personen
+          width: 50
+      -
+        handle: description
+        field: common.text_plain
+        config:
+          display: Description
+      -
+        handle: fun_fact
+        field: common.text_plain
+        config:
+          display: 'Fun Fact'
+      -
+        handle: links
+        field: buttons.buttons
+        config:
+          display: 'Apart from Stegreif'
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+          generate: true
+          listable: hidden
+          display: Slug
+          validate:
+            - required
+      -
+        handle: team_tags
+        field:
+          type: terms
+          taxonomies:
+            - team_tags
+          display: 'Team Tags'
+          mode: default
+          instructions_position: above
+          listable: hidden
+          read_only: false
+          create: true

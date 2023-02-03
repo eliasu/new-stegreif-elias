@@ -1,28 +1,39 @@
 {{#
-    @name Layout
-    @desc The default layout file.
+	@name Layout
+	@desc The default layout file.
 #}}
 
 <!-- /layout.antlers.html -->
 <!doctype html>
-<html lang="{{ site:short_locale }}" class="antialiased">
+<html lang="{{ site:short_locale }}" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        {{ vite src="resources/css/site.css|resources/js/site.js" }}
+        <link rel="stylesheet" href="{{ mix src='css/site.css' }}">
+        <script src="{{ mix src='/js/site.js' }}" defer></script>
+
+          {{# yield head #}}
+          {{ yield:head }}
+        
         {{ partial:snippets/seo }}
         {{ partial:snippets/browser_appearance }}
     </head>
-    <body class="flex flex-col min-h-screen bg-white selection:bg-primary selection:text-white">
+    
+    <body class="flex flex-col min-h-screen bg-yellow selection:bg-skin-accent">
         {{ partial:snippets/noscript }}
-        {{ partial:navigation/skip_to_content }}
+        {{# {{ partial:navigation/skip_to_content }} #}}
         {{ partial:components/toolbar }}
         {{ yield:seo_body }}
-
-        {{ partial:layout/header }}
+        {{ partial:snippets/page_variables }}
+        
+        {{ partial:layout/navbar }}
         {{ template_content }}
         {{ partial:layout/footer }}
+
+         {{# yield body #}}
+         {{ yield:body }}
+
     </body>
 </html>
 <!-- End: /layout.antlers.html -->

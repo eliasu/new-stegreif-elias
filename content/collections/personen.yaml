@@ -1,0 +1,16 @@
+title: Personen
+sites:
+  - de
+  - en
+propagate: true
+template: default
+layout: layout
+taxonomies:
+  - team_tags
+  - instrumenten_gruppen
+  - personen_funktionen
+revisions: false
+sort_dir: asc
+date_behavior:
+  past: public
+  future: private

@@ -1,0 +1,20 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: translations
+        field:
+          fields:
+            -
+              import: translation_item
+          mode: table
+          add_row: 'Add Translation'
+          reorderable: true
+          display: Translations
+          type: grid
+          icon: grid
+          localizable: true
+          listable: hidden
+          instructions_position: above
+          read_only: false

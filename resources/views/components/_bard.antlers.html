@@ -1,0 +1,16 @@
+{{#
+	@name bard
+	@desc The bard component.
+
+    @param style => add prose classes f.ex. style="block-inset-reset" -- falls back to simple .prose
+    @param class => add custom classes 
+    @param not_fluid => set to true to avoid fluid container 
+#}}
+
+<!-- /components/_bard.antlers.html -->
+<{{ as or 'article' }} class="{{ style ?? "prose" }} flex flex-col gap-y-4 sm:gap-y-8 prose-pre:whitespace-pre-wrap {{ not_fluid ? "" : "fluid-container" }} {{ class }}">
+    {{ handle }}
+        {{ partial src="components/{type}" }}
+    {{ /handle }}
+</{{ as or 'article' }}>
+<!-- End: /components/_bard.antlers.html -->

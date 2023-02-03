@@ -1,0 +1,12 @@
+title: Tourmanagement
+team_tag_type: dark
+filter_category: management
+updated_by: 7d709850-5c35-4065-be68-b627c348051d
+updated_at: 1657807821
+blueprint: team_tags
+localizations:
+  en:
+    title: 'tourmanagement and production'
+    slug: tourmanagement-und-produktion
+    updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+    updated_at: 1657212039

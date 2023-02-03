@@ -1,0 +1,114 @@
+{{#
+	@name orchestra block
+	@desc The orchestra block component.
+    @ parameters 
+        show => (int - limits the displayed items falls back to unlimited)
+        start => if start is set to "right" collection will start right
+#}}
+
+<script>
+    /*
+        Here is the logic fot the filter bar
+    */ 
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('orchester_filter', () => ({
+            selected_team_func: '',
+            selected_team_instrument: '',
+            shouldShow(team_func, team_instrument) {
+                if(this.selected_team_func=='' && this.selected_team_instrument=='') return true;
+                const tf = JSON.parse(team_func);
+                const ti = JSON.parse(team_instrument);
+                if(tf.includes(this.selected_team_func) || ti.includes(this.selected_team_instrument)) return true;
+            },
+            
+        }))
+    })
+</script>
+
+<!-- /components/_orchestra_block.antlers.html -->
+<div class="flex flex-col fluid-container gap-y-20 xl:gap-y-40" x-data="orchester_filter">
+    
+    {{ partial:typography/h2 :content="headline" }}
+   
+        {{# orchestra headline #}}
+
+        {{# filter bar #}}
+
+
+    <div class="flex flex-wrap max-w-full gap-6 gap-y-2 xs:flex-row ">
+        {{partial:components/select  label="{{trans:strings.orchester_func}}" model="selected_team_func"}}
+            {{ taxonomy:personen_funktionen}}
+                <option value="{{slug}}">{{title}}</option>
+            {{/taxonomy:personen_funktionen}}
+        {{/partial:components/select}}
+        {{partial:components/select  label="{{trans:strings.orchester_inst}}" model="selected_team_instrument"}}
+            {{ taxonomy:instrumenten_gruppen}}
+                <option value="{{slug}}">{{title}}</option>
+            {{/taxonomy:instrumenten_gruppen}}
+        {{/partial:components/select}}
+    </div>
+        
+       
+    
+    {{# team cards grid wrapper #}}
+    <div class="grid items-stretch w-full grid-cols-pill-s gap-x-8 gap-y-8">
+            
+        <div class="fixed w-40 h-40"></div>
+
+        
+        {{# all team #}}
+        {{ collection:personen }}
+            {{ if instrumenten_gruppen}}
+                {{ t_inst = {instrumenten_gruppen pluck ('slug')} | to_json | sanitize:true; }}
+            {{else}}
+                {{ t_inst = "[]" }}
+            {{ /if }}
+            {{ if personen_funktionen}}
+                {{ t_func = {personen_funktionen pluck ('slug')} | to_json | sanitize:true}}
+            {{else}}
+                {{ t_func = "[]" }}
+            {{ /if }}
+
+            {{# {{ team_filters ?= ( t_filter = {team_filters pluck ('slug')} ) }} #}}
+        
+        
+ 
+            {{# team card #}}
+            <button 
+                @click.prevent="
+                    $store.modal.open = true,
+                    $store.modal.title = '{{title}}', 
+                    $store.modal.image = { url : '{{ glide:image preset='lg' }}', extension : '{{image.extension}}', mime_type : '{{image.mime_type}}', alt : '{{image.alt}}', focus : '{{image.focus | background_position}}', width : '{{image.width}}', height : '{{image.height}}', caption : '{{image.image_title}}' },
+                    $store.modal.description = `{{ description | smartypants | nl2br }}`,
+                    $store.modal.showFunFact = {{ fun_fact ? 'true' : 'false'}},
+                    $store.modal.funFact = `{{ fun_fact | smartypants | nl2br }}`,
+                    $store.modal.showLinks = {{ links ? 'true' : 'false'}},
+                    $store.modal.links = [ {{ links }} { title : '{{ label }}', url : '{{ url }}' }{{!last ?= ','}} {{ /links }} ],
+                    $store.modal.teamTags = [ {{ team_tags }} { content : '{{ title }}', color : '{{ team_tag_type }}' }{{!last ?= ','}} {{ /team_tags }} ] "
+                    class="relative flex flex-col items-start p-4 cursor-pointer group focus-visible:outline-none"
+                    x-transition.duration.500ms
+                    x-show="shouldShow('{{t_func}}', '{{t_inst}}')">
+
+                {{# tags  #}}
+                <div class="flex flex-col items-start">
+                    {{ partial:typography/tag color="yellow" content="{ title }" }}
+                    {{ team_tags }}
+                        {{ partial:typography/tag color="{team_tag_type}" content="{ title }" }}
+                    {{ /team_tags }}
+                </div>
+
+                {{# square spacer for height #}}
+                <div class="flex flex-col w-full h-full pointer-events-none aspect-w-4 aspect-h-6"></div>
+
+                {{# read more #}}
+                {{ partial:typography/h6 content="{ trans:strings.more }" class="tracking-wider absolute inset-x-0 text-center bottom-[50%] text-transparent scale-90 group-hover:scale-100 group-hover:text-light motion-safe:transition-transform" }}
+                
+                {{# image #}}
+                <div class="absolute inset-0 overflow-hidden motion-safe:transition-[inset_opacity] rounded-full group-hover:inset-2 group-hover:opacity-60 z-behind">
+                    {{ partial:components/picture nocaption="true" :image="thumbnail" cover="true" sizes="(min-width: 768px) 35vw, 90vw" }}
+                </div>
+            </button>
+        {{ /collection:personen }}
+    </div>
+</div>
+<!-- End: /components/_orchestra_block.antlers.html --> 

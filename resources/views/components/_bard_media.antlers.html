@@ -1,0 +1,32 @@
+{{#
+	@name bard_media
+	@desc The bard_media component.
+    @set page.article.bard_media
+#}}
+
+<!-- /components/_bard_media.antlers.html -->
+<div class="flex flex-col not-prose relative py-8 md:py-12
+            {{ if size == "medium"}} md:block-full block-size-full-1
+            {{ elseif size == "small"}} block-in-2 block-size-1
+            {{ /if }}
+">
+
+    {{# image #}}
+    {{ if select_type == "image" }}
+        <div class="w-full aspect-w-4 aspect-h-3">
+            
+            {{# is it cover or contain (set in assets settings) #}}
+            {{ image.no_trim ? 
+                { partial:components/picture contain="true" :image="image" sizes="(min-width: 768px) 70vw, 95vw" } :
+                { partial:components/picture cover="true" :image="image" sizes="(min-width: 768px) 70vw, 95vw" }
+            }}
+        </div>
+
+    {{# video #}}
+    {{ else }}
+        <div class="w-full">    
+            {{ partial:components/video sound="true" youtube_url="{video}" cover="true" }}
+        </div>
+    {{ /if }} 
+</div> 
+<!-- End: /components/_bard_media.antlers.html -->

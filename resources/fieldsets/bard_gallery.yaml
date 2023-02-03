@@ -1,0 +1,22 @@
+title: bard_gallery
+fields:
+  -
+    handle: size
+    field: common.size
+    config:
+      options:
+        small: Small
+        big: Big
+  -
+    handle: gallery_title
+    field: common.text_single
+    config:
+      display: 'Gallery Title'
+      instructions: 'Display a title if necessary.'
+      placeholder: Impressionen
+  -
+    handle: images
+    field: common.images
+    config:
+      restrict: false
+      folder: gallery_images

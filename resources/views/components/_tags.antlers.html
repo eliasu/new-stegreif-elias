@@ -1,0 +1,85 @@
+{{#
+	@name Tags
+	@desc The Tags component.
+    @param vertical => set tu true to always display vertical
+    @param class => add custom css classes
+#}}
+
+
+<!-- /components/_tags.antlers.html -->
+
+{{# if it is a production  #}}
+{{ if { select_content ? select_content.blueprint : blueprint } == "programme" }}
+    <div class="{{ vertical ?= "flex-col" }} flex justify-start items-start flex-wrap {{ class }}">
+        
+        {{# if its a production and has a related collection #}}
+        {{ select_content ? select_content.related_reihe : related_reihe }}
+            {{ partial:typography/tag as="a" label="{title}" :url="url" link_type="url"  class="m-0" color="yellow" content="{ title }" }}
+        {{ /select_content ? select_content.related_reihe : related_reihe }}
+
+        {{# production or education tag #}}
+        {{ if { select_content ? select_content.select_type : select_type } == "programm" }}
+            {{ partial:typography/tag class="m-0" color="green" content="{ trans:strings.production }" }}
+        {{ else }}
+            {{ partial:typography/tag class="m-0" color="dark" content="{ trans:strings.education }" }}
+        {{ endif }}
+    </div>
+
+
+{{# if it is a date  #}}
+{{ elseif { select_content ? select_content.blueprint : blueprint } == "termine" }}
+    
+    {{# dont show tag container if there no related items #}}
+    {{ if select_content.related_programm || related_programm }}
+        <div class="{{ vertical ?= "flex-col" }} flex justify-start items-start flex-wrap {{ class }}">
+            
+            {{# if its a date and has a related production #}}
+            {{ select_content ? select_content.related_programm : related_programm }}
+                
+                {{# does the related production has related collection? #}}
+                {{ select_content ? select_content.related_reihe : related_reihe }}
+                    {{ partial:typography/tag as="a" label="{title}" :url="url" link_type="url"  class="m-0" color="yellow" content="{ title }" }}
+                {{ /select_content ? select_content.related_reihe : related_reihe }}
+                
+
+                {{# production or education tag #}}
+                {{ if { select_content ? select_content.select_type : select_type } == "programm" }}
+                    {{ partial:typography/tag as="a" label="{title}" :url="url" link_type="url"  class="m-0" color="green" content="{ title }" }}
+                {{ else }}
+                    {{ partial:typography/tag as="a" label="{title}" :url="url" link_type="url"  class="m-0" color="dark" content="{ title }" }}
+                {{ endif }}
+                
+            {{ /select_content ? select_content.related_programm : related_programm }}
+        </div>
+    {{ /if }}
+
+{{# if it is a collection #}}
+{{ elseif { select_content ? select_content.blueprint : blueprint } == "reihen" }}
+    <div class="{{ vertical ?= "flex-col" }} flex justify-start items-start flex-wrap {{ class }}">
+        {{ partial:typography/tag class="m-0" color="yellow" content="{ trans:strings.collection }" }}
+        
+        {{# show all related productions #}}
+        {{ if show_related and related_programme }}
+            <div class="flex flex-col items-start">
+                {{# if its a collection and has a related production #}}
+                {{ related_programme }}
+                    {{# production or education tag #}}
+                    {{ if { select_type } == "programm" }}
+                        {{ partial:typography/tag as="a" label="{title}" :url="url" link_type="url"  class="m-0" color="green" content="{ title }" }}
+                    {{ else }}
+                        {{ partial:typography/tag as="a" label="{title}" :url="url" link_type="url"  class="m-0" color="dark" content="{ title }" }}
+                    {{ endif }}
+                {{ /related_programme }}
+            </div>
+        {{ /if }}
+    </div>
+
+{{# if it is a news  #}}
+{{ elseif { select_content ? select_content.blueprint : blueprint } == "neuigkeiten" }}
+    
+    <div class="{{ vertical ?= "flex-col" }} flex justify-start items-start flex-wrap {{ class }}">            
+        {{ partial:typography/tag color="light" content={ date iso_format="DD.MM.YYYY" } class="mb-0" }}
+    </div>
+
+{{ /if }}
+<!-- End: /components/_tags.antlers.html -->

@@ -1,0 +1,95 @@
+{{#
+	@name bard_gallery
+	@desc The bard_gallery component.
+    @set page.article.bard_gallery
+#}}
+
+<!-- /components/_bard_gallery.antlers.html -->
+<div class="flex flex-col not-prose relative py-8 {{ if size == "small"}} block-size-1 sm:pr-10 md:pr-20 {{ /if }}">
+
+    {{# galery wrapper #}}
+    <div class="relative flex flex-wrap justify-around w-full h-[90vh] {{ if size == "small"}} xs:h-[60vmin] {{else}} xs:h-[75vmin] {{ /if }}">
+        
+        {{ if gallery_title }}
+            {{ partial:typography/tag class="absolute self-start left-4 bottom-4 z-front" content="{ gallery_title }" color="inverted" }}
+        {{ /if }}
+
+        {{# limit to 9 pictures in lightbox there will be mor available #}}
+        {{ images }}
+
+            {{# define image flow and tint based on image count #}}
+            {{ if images | count == 1 }}
+                {{ img_flow = "h-full basis-1" }}
+                {{ temp_size = "100vw" }}
+                {{ temp_tint = "dark" }}
+            {{ elseif images | count <= 2 }}
+                {{ img_flow = "h-full basis-1/2 xs:basis-1/3" }}
+                {{ temp_size = "100vw" }}
+                {{ if index == 1 }} {{ temp_tint = "yellow" }} {{ else }} {{ temp_tint = "dark" }} {{ /if }}
+            {{ elseif images | count <= 4 }}
+                {{ img_flow = "h-1/2 basis-1/2" }}
+                {{ temp_size = "50vw" }} 
+                {{ if index == 2 }} {{ temp_tint = "yellow" }} {{ else }} {{ temp_tint = "dark" }} {{ /if }}
+            {{ elseif images | count <= 6 }}
+                {{ img_flow = "h-1/3 xs:h-1/2 basis-1/2 xs:basis-1/3" }}
+                {{ temp_size = "30vw" }}
+                {{ if index == 2 || index == 3 }} {{ temp_tint = "yellow" }} {{ else }} {{ temp_tint = "dark" }} {{ /if }}
+            {{ elseif images | count <= 8 }}
+                {{ img_flow = "h-1/4 xs:h-1/3 basis-1/2 xs:basis-1/3" }}
+                {{ temp_size = "30vw" }}
+                {{ if index == 2 || index == 6 || index == 7 }} {{ temp_tint = "yellow" }} {{ else }} {{ temp_tint = "dark" }} {{ /if }}
+            {{ elseif images | count >= 9 }}
+                {{ img_flow = "h-1/5 xs:h-1/3 basis-1/2 xs:basis-1/3" }}
+                {{ temp_size = "30vw" }}
+                {{ if index == 0 || index == 5 || index == 7 }} {{ temp_tint = "yellow" }} {{ else }} {{ temp_tint = "dark" }} {{ /if }}
+            {{ /if }}
+
+
+
+            {{# show max 9 images, but make more available within lightbox #}}
+            {{ if index >= 9 }}
+                
+                {{# hidden links to be available for lightbox #}}
+                <a href="{{url}}" data-fslightbox="lb-{{ lb_index }}" class="hidden"> Not Shwon </a>
+            
+            {{# show max 9 images in grid #}}
+            {{ else }}
+
+                {{# image container #}}
+                <div class="w-full {{ img_flow }} grow relative group cursor-pointer">
+
+                    {{# get image cation data as markup #}}
+                    {{img_caption =  {partial:typography/tag class='' content='{ media_caption ?? image_title }' color='inverted'} | sanitize }}
+
+                    {{# lightbox link #}}
+                    <a href="{{url}}" data-fslightbox="lb-{{ lb_index }}" data-caption="{{img_caption}}">
+                        
+                        {{# opening arrows on hover #}}
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-skin-accent">
+                            <div class="rotate-45">
+                                {{ svg src="arrow_up" class="w-6 opacity-0 pointer-events-none fill-current motion-safe:transition group-hover:-translate-y-2 group-hover:opacity-100" }}
+                                {{ svg src="arrow_down" class="w-6 opacity-0 pointer-events-none fill-current motion-safe:transition group-hover:translate-y-2 group-hover:opacity-100" }}
+                            </div>
+                        </div>
+                        
+                        {{# image #}}
+                        {{ partial:components/picture cover="true" tint="{temp_tint}" tint_hover="true" :image="url" sizes="(min-width: 768px) {temp_size}, 100vw" }}
+                    </a>
+
+                </div>
+            {{ /if }}
+        {{ /images }}
+        
+        {{# add on the lightbox index variable after the images loop – this archieves different lightbox instances for "data-fslightbox" #}}
+        {{ lb_index += 1 }}
+    </div>    
+</div> 
+<!-- End: /components/_bard_gallery.antlers.html -->
+
+
+{{ section:body }}
+    <script type="text/javascript" src="/site_assets/js/fslightbox.js"> 
+       
+    </script>
+   
+{{ /section:body }}

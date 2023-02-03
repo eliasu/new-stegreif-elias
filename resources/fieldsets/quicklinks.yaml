@@ -1,0 +1,56 @@
+title: Quicklinks
+fields:
+  -
+    handle: quicklinks_enabled
+    field:
+      default: false
+      display: 'Quicklinks Enabled'
+      type: toggle
+      icon: toggle
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      width: 50
+  -
+    handle: show_social
+    field:
+      default: false
+      display: 'Show Social'
+      type: toggle
+      icon: toggle
+      instructions: 'Display Social Media Buttons'
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      width: 50
+      if:
+        quicklinks_enabled: 'equals true'
+  -
+    handle: quick_links
+    field:
+      fields:
+        -
+          handle: anchor_name
+          field: common.text_single
+          config:
+            display: 'Anchor Name'
+            instructions: 'Der Freitext Name Leerzeichen sind erlaubt'
+            width: 50
+        -
+          handle: anchor_id
+          field: common.text_single
+          config:
+            display: 'Anchor ID'
+            instructions: 'Die ID für den HTML Anchor. Bitte nur URL fähige Zeichen und Formate, KEINE Leerzeichen und ohne das "#" Zeichen'
+            width: 50
+      mode: table
+      reorderable: true
+      display: 'Quick Links'
+      type: grid
+      icon: grid
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      if:
+        quicklinks_enabled: 'equals true'
+      localizable: true

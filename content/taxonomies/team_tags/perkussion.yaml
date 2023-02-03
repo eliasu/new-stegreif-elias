@@ -1,0 +1,12 @@
+title: Perkussion
+team_tag_type: green
+filter_category: rhythmusinstrumente
+updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+updated_at: 1657210219
+blueprint: team_tags
+localizations:
+  en:
+    title: percussion
+    slug: perkussion
+    updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+    updated_at: 1657210234

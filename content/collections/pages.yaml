@@ -1,5 +1,9 @@
 title: Pages
-template: default
+sites:
+  - de
+  - en
+propagate: true
+template: page
 layout: layout
 revisions: false
 route: '{parent_uri}/{slug}'

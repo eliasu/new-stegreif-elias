@@ -1,0 +1,27 @@
+{{#
+	@name Header
+	@desc The sites header rendered on each page.
+#}}
+
+<!-- /layout/_navbar.antlers.html -->
+<header class="fixed w-full pointer-events-none z-nav top-4 lg:top-20">
+    <div class="flex items-start justify-between fluid-container">
+        <div class="flex pointer-events-auto">
+            
+            {{# back link gets displayed with single entries pages #}}
+            {{# {{ if blueprint == "programme" || blueprint == "reihen" }}
+                {{ partial:components/button label="{{ trans:strings.back }}" url="{{ configuration:select_page:url }}" reverse="true" button_type="background" icon="arrow_left" link_type="url"}}
+            {{ elseif blueprint == "termine" || blueprint == "neuigkeiten" }}
+                {{ partial:components/button label="{{ trans:strings.back }}" url="{{ parent }}" reverse="true" button_type="background" icon="arrow_left" link_type="url"}}
+            {{ /if }} #}}
+            
+            {{# home link "logo" #}}
+            <div id="stgrf_logo" class="transition duration-500 ease-in-out opacity-0">
+                {{ partial:components/logo }}
+            </div>
+        </div>
+        
+        {{ partial:navigation/main }}
+    </div>
+</header>
+<!-- End: /layout/_navbar.antlers.html -->

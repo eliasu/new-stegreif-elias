@@ -4,18 +4,23 @@ fields:
     handle: image
     field:
       mode: list
-      container: images
+      container: assets
       restrict: false
       allow_uploads: true
       max_files: 1
       type: assets
-      localizable: true
       listable: hidden
       display: Image
-      instructions_position: above
-      visibility: visible
-      always_save: false
-      show_filename: true
+  -
+    handle: images
+    field:
+      mode: list
+      container: assets
+      restrict: false
+      allow_uploads: true
+      type: assets
+      listable: hidden
+      display: Images
   -
     handle: entry
     field:
@@ -41,7 +46,7 @@ fields:
       toolbar_mode: fixed
       link_noopener: true
       link_noreferrer: false
-      container: files
+      container: assets
       target_blank: false
       reading_time: false
       fullscreen: true
@@ -50,34 +55,24 @@ fields:
       replicator_preview: false
       localizable: true
       listable: hidden
-      display: Text
+      display: 'Text Rich'
       instructions_position: above
-      visibility: visible
-      always_save: false
+      read_only: false
       always_show_set_button: false
-      previews: true
       enable_input_rules: true
       enable_paste_rules: true
       antlers: false
-      remove_empty_nodes: trim
-      collapse: false
-      smart_typography: true
-      inline: false
   -
     handle: text_basic
     field:
       buttons:
-        - bold
-        - italic
-        - unorderedlist
-        - orderedlist
-        - removeformat
+        - h3
         - anchor
       save_html: false
       toolbar_mode: fixed
       link_noopener: true
       link_noreferrer: false
-      container: files
+      container: assets
       target_blank: false
       reading_time: false
       fullscreen: true
@@ -86,35 +81,155 @@ fields:
       replicator_preview: false
       localizable: true
       listable: hidden
-      display: Text
+      display: 'Text Basics'
       instructions_position: above
-      visibility: visible
-      always_save: false
+      read_only: false
       always_show_set_button: false
-      previews: true
       enable_input_rules: true
       enable_paste_rules: true
       antlers: false
-      remove_empty_nodes: trim
-      collapse: false
-      smart_typography: true
-      inline: false
   -
     handle: text_plain
     field:
       type: textarea
       localizable: true
       listable: hidden
-      display: Text
+      display: 'Text Plain'
+      instructions_position: above
+      read_only: false
+      antlers: false
+  -
+    handle: text_single
+    field:
+      input_type: text
+      antlers: false
+      display: 'Text Single'
+      type: text
+      icon: text
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      localizable: true
+  -
+    handle: team_tag
+    field:
+      mode: default
+      create: true
+      taxonomies:
+        - team_tags
+      display: 'Team Tag'
+      type: terms
+      icon: taxonomy
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: related_tags
+    field:
+      mode: default
+      create: true
+      taxonomies:
+        - tags
+      display: Tags
+      type: terms
+      icon: taxonomy
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: aktuell
+    field:
+      default: true
+      display: Aktuell
+      type: toggle
+      icon: toggle
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: select_type
+    field:
+      options:
+        programm: Programm
+        education: Education
+      multiple: false
+      clearable: false
+      searchable: false
+      taggable: false
+      push_tags: false
+      cast_booleans: false
+      default: programm
+      display: 'Select Type'
+      type: select
+      icon: select
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: youtube_url
+    field:
+      placeholder: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      input_type: url
+      antlers: false
+      display: Video
+      type: text
+      icon: text
+      instructions: 'YouTube or Vimeo URL.'
+      listable: hidden
+      instructions_position: below
+      read_only: false
+  -
+    handle: theme_selector
+    field:
+      options:
+        dark: Dark
+        yellow: Yellow
+        light: Light
+      default: dark
+      display: 'Theme Selector'
+      type: button_group
+      icon: button_group
+      instructions: 'Choose the color style of this section.'
+      listable: hidden
+      instructions_position: above
+      read_only: false
   -
     handle: size
     field:
       options:
-        md: Normal
-        lg: LG
-        xl: XL
-      type: button_group
-      localizable: true
-      default: md
-      listable: hidden
+        small: Small
+        medium: Medium
+        big: Big
+      default: small
       display: Size
+      type: button_group
+      icon: button_group
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: alignment
+    field:
+      options:
+        left: Left
+        right: Right
+      default: left
+      display: Alignment
+      type: button_group
+      icon: button_group
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: teaser_text
+    field:
+      character_limit: '210'
+      antlers: false
+      display: 'Teaser Text'
+      type: textarea
+      icon: textarea
+      instructions: 'Teaser text for feature blocks etc.'
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      localizable: true

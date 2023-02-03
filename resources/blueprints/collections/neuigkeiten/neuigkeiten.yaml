@@ -1,0 +1,72 @@
+title: Neuigkeiten
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          localizable: true
+          listable: true
+          display: Title
+          validate:
+            - required
+      -
+        import: header
+      -
+        handle: teaser_text
+        field: common.teaser_text
+      -
+        import: section
+      -
+        import: sections
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: date
+        field:
+          type: date
+          required: true
+          listable: true
+          validate:
+            - required
+          display: Date
+          mode: single
+          time_enabled: false
+          time_required: false
+          earliest_date: '2021-01-01'
+          full_width: false
+          inline: false
+          columns: 1
+          rows: 1
+      -
+        import: select_transition_theme
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+          generate: true
+          listable: hidden
+          display: Slug
+          validate:
+            - required
+      -
+        handle: template
+        field:
+          default: page
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false

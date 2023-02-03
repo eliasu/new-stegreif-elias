@@ -1,0 +1,12 @@
+title: 'Projektleitung & Presse'
+team_tag_type: dark
+filter_category: management
+updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+updated_at: 1657211018
+blueprint: team_tags
+localizations:
+  en:
+    title: 'project manager & press contact'
+    slug: projektleitung-und-presse
+    updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+    updated_at: 1657211032

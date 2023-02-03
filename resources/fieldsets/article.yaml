@@ -4,16 +4,18 @@ fields:
     handle: article
     field:
       buttons:
-        - h1
+        - bigger
+        - smaller
         - h2
         - h3
-        - bold
-        - italic
-        - unorderedlist
-        - orderedlist
-        - quote
+        - h4
+        - h5
+        - accent
         - removeformat
         - anchor
+        - bold
+        - italic
+        - underline
       save_html: false
       toolbar_mode: fixed
       link_noopener: false
@@ -30,41 +32,56 @@ fields:
       always_show_set_button: true
       validate:
         - required
-      sets:
-        buttons:
-          display: Buttons
-          fields:
-            -
-              import: buttons
-        image:
-          display: Image
-          fields:
-            -
-              import: image
-        pull_quote:
-          display: 'Pull quote'
-          fields:
-            -
-              import: pull_quote
-        table:
-          display: Table
-          fields:
-            -
-              import: table
-        video:
-          display: Video
-          fields:
-            -
-              import: video
-      container: files
+      container: assets
       enable_input_rules: true
       enable_paste_rules: true
       instructions_position: above
-      visibility: visible
-      always_save: false
-      previews: true
+      read_only: false
+      link_collections:
+        - pages
+        - termine
+        - reihen
+        - programme
       antlers: false
-      remove_empty_nodes: trim
-      collapse: false
-      smart_typography: true
-      inline: false
+      sets:
+        bard_buttons:
+          display: Buttons
+          fields:
+            -
+              import: bard_buttons
+        bard_feature:
+          display: Feature
+          fields:
+            -
+              import: bard_feature
+        bard_gallery:
+          display: Gallery
+          fields:
+            -
+              import: bard_gallery
+        bard_media:
+          display: Media
+          fields:
+            -
+              import: bard_media
+        bard_partners:
+          display: Partners
+          fields:
+            -
+              import: bard_partners
+        bard_quotes:
+          display: Quote
+          fields:
+            -
+              import: bard_quotes
+        bard_code:
+          display: Code
+          fields:
+            -
+              import: bard_code
+        anchor:
+          display: Anchor
+          fields:
+            -
+              import: anchor
+      instructions: 'Use Shift + Enter for a line-break without spacing.'

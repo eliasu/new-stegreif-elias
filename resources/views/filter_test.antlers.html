@@ -1,0 +1,19 @@
+{{ collection from="programme" as="posts" }}
+  {{ mydata =  (posts | to_json) }}
+  <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('thedata', () => ({
+          posts:{{ mydata }}
+        }))
+    })
+  </script>
+
+{{ /collection  }}
+
+<div class="" x-data="thedata">
+  
+  {{# data is available here #}}
+
+</div>
+
+

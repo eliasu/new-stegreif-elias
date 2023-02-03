@@ -1,82 +1,55 @@
 {{#
-    @name Main mobile navigation
-    @desc The sites main mobile navigation rendered on each page. It's 2 levels deep by default and uses AlpineJS for interactivity.
+	@name Main mobile navigation
+	@desc The sites main mobile navigation rendered on each page. It's 2 levels deep by default and uses AlpineJS for interactivity.
 #}}
 
 <!-- /navigation/_main_mobile.antlers.html -->
 <nav
     x-data="{ mobileNavOpen: false }"
-    class="md:hidden"
+    class="flex h-12 pointer-events-auto lg:hidden"
     aria-label="{{ trans:strings.main_navigation }}"
-    x-trap.inert.noscroll="mobileNavOpen"
-    @keyup.escape.stop.prevent="mobileNavOpen = false"
-    x-cloak
 >
     <button
         @click.prevent="mobileNavOpen = !mobileNavOpen"
-        class="fixed bottom-0 right-0 z-20 flex items-center justify-center w-16 h-16 mr-8 text-xs font-bold text-white mb-safe rounded bg-primary focus:outline-none focus-visible:ring-2 ring-primary ring-offset-2"
-        :aria-label="
-        mobileNavOpen
-            ? '{{ trans:strings.nav_close }}'
-            : '{{ trans:strings.nav_open }}'
-        "
+        class="relative z-20 w-12 h-12 px-2 py-3 text-darkblue bg-light focus-visible:ring-2 ring-primary ring-offset-2 hover:bg-green hover:text-light motion-safe:transition group"
+        :aria-label="mobileNavOpen ? '{{ trans:strings.nav_close }}' : '{{ trans:strings.nav_open }}'"
         :aria-expanded="mobileNavOpen"
-        x-text="mobileNavOpen ? '{{ trans:strings.close }}' : '{{ trans:strings.menu }}'"
-    ></button>
+    >
+        {{# burger icon #}}
+        <div class="relative flex flex-col items-center justify-between w-full h-full origin-bottom-right rotate-0" :class="mobileNavOpen ? 'open-burger' : ''">
+            <div class="relative bg-darkblue h-[2px] w-full origin-center-left group-hover:bg-light motion-safe:transition" ></div>
+            <div class="relative bg-darkblue h-[2px] w-8 origin-center group-hover:bg-light motion-safe:transition-[width_background-color]" ></div>
+            <div class="relative bg-darkblue h-[2px] w-full origin-center-left group-hover:bg-light motion-safe:transition" ></div>
+        </div>
+    </button>
 
     <div
-        class="fixed inset-0 z-10 pt-8 px-8 pb-12 flex flex-col justify-end bg-white"
+        class="fixed inset-0 z-10 flex flex-col items-start justify-between p-4 overflow-hidden bg-light motion-safe:transition"
         x-show="mobileNavOpen"
-    >
-        <ul class="flex flex-col py-2 space-y-4 overflow-auto">
-            {{ nav:main max_depth="2" include_home="true" select="title|url" }}
-                <li
-                    {{ if children }}
-                        x-data="{ subnavOpen: false }"
-                        @focusin.window="!$refs.subnav.contains($event.target) && (subnavOpen = false)"
-                    {{ /if }}
-                    class="leading-none"
-                >
-                    <a
-                        class="w-full py-2 flex items-center space-x-1 text-lg font-bold hover:text-primary {{ is_current || is_parent ? 'text-primary' : 'text-neutral' }} focus:outline-none focus-visible:ring-2 ring-primary"
-                        {{ if children }}
-                            href="#"
-                            @click.prevent="subnavOpen = !subnavOpen"
-                            @click.outside="subnavOpen = false"
-                            :aria-label="subnavOpen
-                                ? '{{ trans:strings.subnav_close }}'
-                                : '{{ trans:strings.subnav_open }}'"
-                            :aria-expanded="subnavOpen"
-                        {{ else }}
-                            href="{{ url }}"
-                        {{ /if }}
-                    >
-                        <span>{{ title }}</span>
-                        {{ if children }}
-                            <div :class="{ 'scale-y-[-1]': subnavOpen }" class="motion-safe:transition-transform">
-                                {{ svg:chevron_down class="w-2 ml-1 overflow-visible stroke-current text-neutral" aria-hidden="true" }}
-                            </div>
-                        {{ /if }}
-                    </a>
-                    {{ if children }}
-                        <ul
-                            x-show="subnavOpen"
-                            x-ref="subnav"
-                            class="flex flex-col items-stretch space-y-2"
-                            x-collapse
-                        >
-                            {{ children }}
-                                <li class="{{ first ?= 'mt-2' }}">
-                                    <a
-                                        class="block py-2 whitespace-nowrap font-bold hover:text-primary {{ is_current || is_parent ? 'text-primary' : 'text-neutral' }} focus:outline-none focus-visible:ring-2 ring-primary"
-                                        href="{{ url }}">
-                                        {{ title }}
-                                    </a>
-                                </li>
-                            {{ /children }}
-                        </ul>
-                    {{ /if }}
-                </li>
+        x-transition:enter-start="translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full"
+        x-trap.inert.noscroll="mobileNavOpen"
+        x-cloak
+    >   
+
+        {{# language picker #}}
+        <div class="flex gap-1">
+            {{ locales all="true" self="true" current_first="false" }}
+                <a
+                    href="{{ permalink }}"
+                    aria-label="{{ locale:name }}"
+                    class="{{ is_current ? "bg-yellow" : "bg-darkblue" }} text-light h-12 w-12 flex justify-center items-center font-bold tracking-wide uppercase whitespace-nowrap hover:text-green"                >
+                    {{ locale:short }}
+                </a>
+            {{ /locales }}
+        </div>
+        
+        {{# nav links #}}
+        <ul class="flex flex-col items-start gap-4">
+            {{ nav:main max_depth="1" include_home="true" select="title|url|is_parent|is_current|button" }}
+                <a class="text-4xl font-normal hover:translate-x-4 hover:text-yellow focus:translate-x-4 focus:text-yellow motion-safe:transition" href="{{url}}" aria-label="{{ title }}">{{ title }}</a>
             {{ /nav:main }}
         </ul>
     </div>

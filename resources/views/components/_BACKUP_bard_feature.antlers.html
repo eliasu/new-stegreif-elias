@@ -1,0 +1,111 @@
+{{#
+	@name bard_feature
+	@desc The bard_feature component.
+#}}
+
+<!-- /components/_bard_feature.antlers.html -->
+<div class="flex gap-8 my-8 md:my-20 {{ if feature_type == "big" }}block-full{{ /if }}">   
+        
+    {{# block wrapper #}}
+    <div class="flex flex-col-reverse gap-8 lg:gap-20 {{ if alignment == "right" }}sm:flex-row-reverse{{else}}sm:flex-row{{ /if }}">
+
+        {{# custom content #}}
+        {{ if !reference_content }}
+
+            {{# content wrap #}}
+            <div class="flex flex-col items-start py-0 sm:py-20 w-full gap-8
+                {{ if feature_type == "big" }} p-4 w-full sm:w-[40%] {{ if alignment == "right" }} sm:pl-0 px-4 lg:pr-16 2xl:pr-40{{else}}pl-4 lg:pl-16 2xl:pl-40{{ /if }}
+                {{ else }} sm:w-[50%] {{ if alignment == "right" }}pr-0 lg:pr-8 xl:pr-20{{else}}pl-0 lg:pl-8 xl:pl-20{{ /if }}
+                {{ /if }}
+            ">
+                {{# article content #}}
+                {{ partial:components/bard handle="{ article }" not_fluid="true" style="block-inset-reset"}}
+            </div>
+
+            {{# bird image/video #}}
+            {{ if feature_type == "bird" }}
+                <div class="relative sm:w-[50%]">
+                    {{# media wrapper #}}
+                    <div class="bottom-0 right-0 -left-20 w-[calc(100%+5rem)] h-[85vmax] sm:w-[calc(100%+5rem)] sm:h-[calc(100%+8.5rem)] sm:absolute aspect-w-3 aspect-h-2 sm:aspect-none bird_image_mask">
+                    
+                        {{# image #}}
+                        {{ if select_media_feature == "image" }}
+                            {{ partial:components/picture nocaption="true" :image="feature_image" cover="true" sizes="(min-width: 768px) 50vw, 100vw" }}
+                        
+                        {{# video #}}
+                        {{ elseif select_media_feature == "video" }}
+                            {{ partial:components/video nocaption="true" :youtube_url="feature_video" cover="true" }}
+                        {{ /if }} 
+                    </div> 
+                </div>  
+            
+            {{# normal image/video #}}
+            {{ else }}
+                <div class="relative {{ if feature_type == 'small' }}sm:w-[50%]{{ elseif feature_type == 'big' }}sm:w-[60%]{{ /if }}">
+                    {{# media wrapper #}}
+                    <div class="sm:absolute sm:inset-0 aspect-w-3 aspect-h-2 sm:aspect-none">
+                    
+                        {{# image #}}
+                        {{ if select_media_feature == "image" }}
+                            {{ partial:components/picture :image="feature_image" cover="true" sizes="(min-width: 768px) 50vw, 100vw" }}
+                        
+                        {{# video #}}
+                        {{ elseif select_media_feature == "video" }}
+                            {{ partial:components/video :youtube_url="feature_video" cover="true" }}
+                        {{ /if }} 
+                    </div> 
+                </div>
+            {{ /if }}
+        
+
+
+
+
+        {{# –––––––––––––––––– #}}
+        {{# referenced content #}}
+        {{# –––––––––––––––––– #}}
+        
+        {{ else }}
+            
+            {{# content wrap #}}
+            <div class="flex flex-col items-start py-0 sm:py-20 w-full 
+                {{ if feature_type == "small" }} sm:w-[50%] {{ if alignment == "right" }}pr-0 lg:pr-8 xl:pr-20{{else}}pl-0 lg:pl-8 xl:pl-20{{ /if }}
+                {{ elseif feature_type == "big" }} p-4 w-full sm:w-[40%] {{ if alignment == "right" }} sm:pl-0 px-4 lg:pr-16 2xl:pr-40{{else}}pl-4 lg:pl-16 2xl:pl-40{{ /if }}
+                {{ /if }}
+            ">
+
+                {{# tags #}}
+                {{ partial:components/tags class="mb-4" }}
+
+                {{# title #}}
+                {{ partial:typography/h3 content="{ select_content.title ?? title }" class="mb-6 sm:mb-8 hyphens" }}
+                
+                {{# preview text field #}}
+                {{ partial:typography/p content="{select_content.teaser_text ?? teaser_text}" class="mb-8" }}
+                
+                {{# link to detail view #}}
+                {{ partial:components/button button_type="lined_base" label="{ trans:strings.more }" link_type="url" entry="{ url }" }}
+            </div>
+
+            {{# media #}}
+            {{ if feature_type == 'small' }} <div class="relative w-full sm:w-[50%]">
+            {{ elseif feature_type == 'big' || feature_type == 'bird' }} <div class="relative w-full sm:w-[60%]"> {{ /if }}
+                
+                {{# media wrapper #}}
+                <div class="sm:absolute sm:inset-0 aspect-w-3 aspect-h-2 sm:aspect-none">
+                    
+                    {{# image #}}
+                    {{ if header_select == "image" }}
+                        {{ partial:components/picture :image="select_content.header_image ?? header_image" cover="true" sizes="(min-width: 768px) 50vw, 100vw" }}
+                    
+                    {{# video #}}
+                    {{ else }}
+                        {{ partial:components/video youtube_url="{select_content.header_video ?? header_video}" cover="true" }}
+                    {{ /if }} 
+                </div>    
+            </div>
+                
+        {{ /if }}
+    </div>
+</div>
+<!-- End: /components/_bard_feature.antlers.html -->

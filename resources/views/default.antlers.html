@@ -1,12 +1,28 @@
-{{#
-    @name Default
-    @desc The default template with an outer wrapper grid as defined in tailwind.config.js. It makes sure all blocks on a page get evenly spaced without having to worry about margins or paddings.
-#}}
+{{# @name Default @desc The default template with an outer wrapper grid as
+defined in tailwind.config.js. It makes sure all blocks on a page get evenly
+spaced without having to worry about margins or paddings. #}}
 
 <!-- /default.antlers.html -->
-<main class="outer-grid" id="content">
-    {{ page_builder scope="block" }}
-        {{ partial src="page_builder/{type}" }}
-    {{ /page_builder }}
+<main class="w-full theme-dark" id="content">
+    
+    <section class="w-full bg-skin-inverted">
+        <div class="grid gap-20 py-40 fluid-container ">
+            {{ partial:typography/h1 content="Das Stegreif Improvisations Theater"}}
+            {{ partial:typography/h2 content="Das Stegreif Improvisations Theater"}}
+            {{ partial:typography/h3 content="Das Stegreif Improvisations Theater"}}
+            {{ partial:typography/h4 content="Das Stegreif Improvisations Theater"}}
+            {{ partial:typography/h5 content="Das Stegreif Improvisations Theater"}}
+            {{ partial:typography/h6 content="Das Stegreif Improvisations Theater"}}
+        </div>
+    </section>
+    
+    <section class="grid w-full grid-cols-12 py-20 bg-skin-inverted fluid-container">
+        {{ partial:typography/prose as="article" class="contents" }}
+            {{ article }}
+                {{ partial src="components/{type}" }}
+            {{ /article }}
+        {{ /partial:typography/prose }}
+    </section>
+
 </main>
 <!-- End: /default.antlers.html -->

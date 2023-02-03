@@ -2,16 +2,16 @@ title: Contact
 honeypot: fax
 email:
   -
-    to: info@site.com
-    from: info@site.com
+    to: noreply@stegreif.org
+    from: noreply@stegreif.org
     reply_to: '{{ email }}'
-    subject: '{{ trans:strings.form_subject_received }}'
+    subject: 'Newsletter Anmeldung auf Stegreif.org'
     html: email/form_owner
     text: email/form_owner_text
   -
     to: '{{ email }}'
-    from: info@site.com
-    reply_to: info@site.com
-    subject: '{{ trans:strings.form_subject_sent }}'
+    from: noreply@stegreif.org
+    reply_to: noreply@stegreif.org
+    subject: 'Danke für deine Newsletter Anmeldung!'
     html: email/form_sender
     text: email/form_sender_text

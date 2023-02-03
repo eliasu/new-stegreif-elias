@@ -1,0 +1,32 @@
+title: Asset
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: image_title
+        field:
+          input_type: text
+          antlers: false
+          display: 'Image Title'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: alt
+        field:
+          display: 'Alt Text'
+          type: text
+          instructions: 'Description of the image'
+      -
+        handle: no_trim
+        field:
+          default: false
+          display: 'No Trim'
+          type: toggle
+          icon: toggle
+          listable: hidden
+          instructions_position: above
+          read_only: false

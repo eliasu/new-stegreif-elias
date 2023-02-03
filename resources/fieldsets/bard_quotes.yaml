@@ -1,0 +1,20 @@
+title: bard_quotes
+fields:
+  -
+    handle: size
+    field: common.size
+    config:
+      options:
+        small: Small
+        big: Big
+  -
+    handle: quote
+    field: common.text_plain
+    config:
+      display: Quote
+  -
+    handle: author
+    field: common.text_single
+    config:
+      display: Author
+      instructions: 'Leave empty to hide author'

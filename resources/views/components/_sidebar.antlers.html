@@ -1,0 +1,25 @@
+{{#
+	@name sidebar attributes
+#}}
+
+<!-- /components/_sidebar.antlers.html -->
+
+{{# sidebar on show views #}}
+<div class="flex flex-col sm:pl-10 sm:pr-10 md:p-0 items-start gap-8 sm:gap-10 lg:gap-16 min-w-[16rem] max-w-xs">
+    
+    {{# tags #}}
+    {{ partial:components/tags vertical="true" }}
+
+    {{# details #}}
+    <div class="flex flex-row flex-wrap gap-8 md:flex-col sm:gap-10 lg:gap-16">
+        {{ details }}
+            <div class="flex flex-col justify-start gap-3 block-inset-reset">
+                {{ partial:typography/h6 content="{ headline }" class="sm:mb-1 text-skin-primary" }} 
+                {{ description }}
+                    {{ partial src="components/{type}" }}
+                {{ /description }}
+            </div>
+        {{ /details }}
+    </div>
+</div>
+<!-- End: /components/_sidebar.antlers.html -->

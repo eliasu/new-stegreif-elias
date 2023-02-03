@@ -1,0 +1,93 @@
+title: bard_feature
+fields:
+  -
+    handle: alternate
+    field:
+      inline_label: 'Right Side'
+      default: false
+      display: Alternate
+      type: toggle
+      icon: toggle
+      width: 50
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: feature_type
+    field: common.size
+    config:
+      options:
+        small: Small
+        big: Big
+        bird: Bird
+      display: 'Feature Type'
+      width: 50
+  -
+    handle: select_media_feature
+    field: header.header_select
+    config:
+      default: image
+      display: 'Select Media Feature'
+      if:
+        reference_content: 'equals false'
+  -
+    handle: feature_video
+    field: header.header_video
+    config:
+      display: 'Feature Video'
+      if:
+        select_media_feature: 'equals video'
+        reference_content: 'equals false'
+      default: 'https://youtu.be/VbDbVlDBi9E'
+  -
+    handle: feature_image
+    field: header.header_image
+    config:
+      display: 'Feature Image'
+      if:
+        select_media_feature: 'not video'
+        reference_content: 'equals false'
+  -
+    handle: article
+    field: article_text.article_text
+    config:
+      buttons:
+        - bigger
+        - smaller
+        - h2
+        - h3
+        - h4
+        - h5
+        - accent
+        - removeformat
+        - anchor
+        - bold
+        - italic
+        - underline
+      if:
+        reference_content: 'equals false'
+  -
+    handle: reference_content
+    field:
+      default: false
+      display: 'Reference Content'
+      type: toggle
+      icon: toggle
+      instructions: 'Instead of adding custom content, select a Reihe/Programm/Education'
+      width: 50
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: select_content
+    field: common.entry
+    config:
+      localizable: false
+      display: 'Select Content'
+      width: 50
+      create: false
+      collections:
+        - reihen
+        - programme
+      if:
+        reference_content: 'equals true'

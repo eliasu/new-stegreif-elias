@@ -1,0 +1,36 @@
+<!-- page_with_sidebar.antlers.html -->
+<main class="relative w-full" id="content"> 
+
+    {{# Header #}}
+    {{ partial:components/header social_icons="false" }}
+
+    {{# first section and additional extend #}}
+    {{ partial:layout/section color="{ theme_selector }" }}
+    
+        <div class="flex flex-col gap-y-8 fluid-container"> 
+            
+            {{# headline falls back to title #}}
+            {{ partial:typography/h3 content="{ headline ?? title }" class="block-in-1 block-size-2" }}
+
+            {{# show bard field with sidebar #}}
+            <div class="flex flex-col-reverse md:flex-row gap-y-20">
+                {{ partial:components/bard handle="{ article }" not_fluid="true" }}
+                {{ partial:components/sidebar }}
+            </div>
+
+            {{# extended section with a second bard field (where large components are enabled) #}}
+            {{ extend_section }}
+                {{ partial:components/bard handle="{ article }" not_fluid="true" }}
+            {{ /extend_section }}
+        </div>
+    {{ /partial:layout/section }}
+
+    {{# if there are additional sections #}}
+    {{ add_section }}
+        {{ partial:layout/section color="{ theme_selector }" }}
+            {{ partial:components/bard handle="{ article }" }}
+        {{ /partial:layout/section }}
+    {{ /add_section }}
+    
+</main>
+<!-- End: page_with_sidebar.antlers.html -->

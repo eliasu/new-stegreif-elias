@@ -11,11 +11,30 @@ sections:
           input_type: text
           localizable: true
           listable: true
-          display: Title
+          display: 'Page Title'
           validate:
             - required
+          instructions_position: above
+          read_only: false
+          antlers: false
       -
-        import: page_builder
+        import: header
+      -
+        handle: theme_selector
+        field: common.theme_selector
+      -
+        import: article
+      -
+        handle: additional_sections
+        field:
+          display: 'Additional Sections'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        import: sections
   seo:
     display: SEO
     fields:
@@ -25,16 +44,9 @@ sections:
     display: Sidebar
     fields:
       -
-        handle: meta
-        field:
-          type: section
-          instructions: 'This entry''s meta data.'
-          display: Meta
-      -
         handle: slug
         field:
           type: slug
-          required: true
           localizable: true
           generate: true
           listable: hidden
@@ -42,6 +54,8 @@ sections:
           validate:
             - required
             - 'unique_entry_value:{collection},{id},{site}'
+      -
+        import: select_transition_theme
       -
         handle: parent
         field:
@@ -51,3 +65,13 @@ sections:
           max_items: 1
           listable: false
           localizable: true
+      -
+        handle: template
+        field:
+          default: page
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false

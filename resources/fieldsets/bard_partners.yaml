@@ -1,0 +1,25 @@
+title: bard_partners
+fields:
+  -
+    handle: headline
+    field: common.text_single
+    config:
+      display: Headline
+      localizable: true
+      width: 100
+      placeholder: 'Unsere Partner*innen und Kooperationen'
+  -
+    handle: text
+    field: common.text_plain
+    config:
+      display: Text
+  -
+    handle: entires
+    field: common.entry
+    config:
+      max_items: 99
+      localizable: false
+      display: 'Partner*innen'
+      create: false
+      collections:
+        - partnerinnen

@@ -1,0 +1,48 @@
+title: bard_media
+fields:
+  -
+    handle: size
+    field: common.size
+  -
+    handle: select_type
+    field:
+      options:
+        image: Image
+        video: Video
+      multiple: false
+      clearable: false
+      searchable: true
+      taggable: false
+      push_tags: false
+      cast_booleans: false
+      default: image
+      display: 'Select Type'
+      type: select
+      icon: select
+      width: 50
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: image
+    field: common.image
+    config:
+      restrict: false
+      width: 50
+      folder: gallery_images
+      if:
+        select_type: 'equals image'
+  -
+    handle: video
+    field: common.youtube_url
+    config:
+      width: 50
+      if:
+        select_type: 'equals video'
+  -
+    handle: media_caption
+    field: common.text_single
+    config:
+      display: 'Media Caption'
+      instructions: 'If left empty it falls back to the image title.'
+      placeholder: 'Credits or a title'

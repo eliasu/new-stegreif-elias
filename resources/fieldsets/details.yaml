@@ -1,0 +1,19 @@
+title: Details
+fields:
+  -
+    handle: details
+    field:
+      collapse: true
+      sets:
+        detail:
+          display: Detail
+          fields:
+            -
+              import: detail
+      display: Details
+      type: replicator
+      icon: replicator
+      localizable: true
+      listable: hidden
+      instructions_position: above
+      read_only: false

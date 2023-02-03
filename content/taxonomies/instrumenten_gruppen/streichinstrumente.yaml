@@ -1,0 +1,10 @@
+title: Streichinstrumente
+updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+updated_at: 1670951974
+blueprint: instrumenten_gruppen
+localizations:
+  en:
+    title: Strings
+    slug: streichinstrumente
+    updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+    updated_at: 1670952068

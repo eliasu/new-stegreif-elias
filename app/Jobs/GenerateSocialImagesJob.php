@@ -65,7 +65,6 @@ class GenerateSocialImagesJob implements ShouldQueue
             $image = Browsershot::url("{$absolute_url}/social-images/{$id}")
                 ->windowSize(1200, 630)
                 ->select('#og')
-                ->waitUntilNetworkIdle()
                 ->save($disk->path($file));
             $container->makeAsset($file)->save();
             $item->set('og_image', $file)->save();
@@ -75,7 +74,6 @@ class GenerateSocialImagesJob implements ShouldQueue
             $image = Browsershot::url("{$absolute_url}/social-images/{$id}")
                 ->windowSize(1200, 600)
                 ->select('#twitter')
-                ->waitUntilNetworkIdle()
                 ->save($disk->path($file));
             $container->makeAsset($file)->save();
             $item->set('twitter_image', $file)->save();

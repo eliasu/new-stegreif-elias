@@ -1,37 +1,96 @@
 {{#
-    @name Button attributes
-    @desc A single button component. Faux is used when a button is displayed inside a link (for example in link blocks).
-    @param* label The caption label.
-    @param as The wrapping element. Defaults to `a`.
-    @param button_type `Inline` if the button needs to be rendered as an inline button.
-    @param faux Boolean. For faux button wrapped in an actual button/anchor.
-    @param inverted Boolean. When the button needs inverted styles.
+	@name Button attributes
+	@desc A single button component. Faux is used when a button is displayed inside a link (for example in link blocks).
 #}}
 
 <!-- /components/_button.antlers.html -->
+
+{{# optional button parameters: 
+    label => text
+    color => button colors are themed. For direct theming use primary/inverted/accent
+    icon => fallback to "arrow_right" / you can use all icons from ressources/svg
+    button_type => optional use "background" instead of standard "lined"
+    link_type => see types in partials/snippets/button_attributes
+    reverse => set to true to reverse flex order
+#}}
+
 {{ if label }}
-    <{{ as or 'a' }}
+    <{{ as or 'a' }} 
+        class = "group flex {{class}}"
         {{ slot:attributes }}
-        class="
-            font-bold underline decoration-2 focus:outline-none focus-visible:ring focus-visible:ring-offset-2
-            {{ if button_type === 'inline' }}
-                underline motion-safe:transition
-                {{ inverted
-                    ? 'text-white decoration-white focus-visible:ring-white'
-                    : 'text-neutral decoration-primary focus-visible:ring-primary'
-                }}
-            {{ else }}
-                inline-flex items-center py-3 px-4 rounded leading-none no-underline select-none whitespace-nowrap motion-safe:transition
-                {{ inverted
-                    ? 'bg-white text-primary focus-visible:ring-white'
-                    : 'bg-primary text-white focus-visible:ring-primary'
-                }}
-            {{ /if }}
-            {{ class }}
-        "
+        {{ slot }}
         {{ !faux ?= { partial:snippets/button_attributes } }}
     >
-        {{ link_type == 'email' ? { label | obfuscate_email } : label }}
+
+    {{# background button #}}
+    {{ if button_type == "background" }}
+        <div class="flex {{ reverse ?= "flex-row-reverse" }} items-center h-8 gap-2 md:gap-4 px-4 text-base md:text-lg font-extrabold uppercase whitespace-nowrap cursor-pointer pointer-events-auto text-skin-inverted motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary bg-skin-primary hover:bg-skin-accent hover:text-skin-base {{ reverse ? 'svg-hover-left' : 'svg-hover-right' }}">
+            {{ label }}
+            {{ svg src="{{ icon ?? "arrow_right" }}" class="w-6 h-4 fill-current md:w-8 md:h-6" alt="" }}
+        </div>
+
+
+    {{# home button  #}}
+    {{ elseif button_type == "background-home" }}
+        <div class="flex items-center h-8 gap-2 md:gap-4 px-4 text-xl 2xl:text-[1.4rem] tracking-normal font-bold whitespace-nowrap cursor-pointer pointer-events-auto text-darkblue motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary bg-light hover:bg-yellow mr-1">
+            {{ label }}
+        </div>
+    
+
+    {{# lined button with base color #}}
+    {{ elseif button_type == "lined_base" }}
+        <div class="{{ reverse ?= "flex-row-reverse" }} relative flex items-center h-8 gap-2 md:gap-4 px-2 text-base md:text-lg font-extrabold uppercase whitespace-nowrap cursor-pointer pointer-events-auto text-skin-base motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary hover:text-skin-primary {{ reverse ? 'svg-hover-left' : 'svg-hover-right' }}">
+			{{ label }}
+            {{ svg src="{{ icon ?? "arrow_right" }}" class="w-6 h-4 fill-current md:w-8 md:h-6" alt="" }}
+            
+            {{# underline #}}
+            <div class="h-0.5 bg-skin-base motion-safe:transition-all group-hover:bg-skin-primary absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+        </div>
+
+    {{# lined button for orchestra modal #}}
+    {{ elseif button_type == "lined_base_modal" }}
+        <div class="relative flex items-center h-8 gap-2 md:gap-4 px-2 font-extrabold uppercase cursor-pointer pointer-events-auto text-base md:text-lg whitespace-nowrap text-skin-base motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary hover:text-skin-primary {{ reverse ? 'svg-hover-left' : 'svg-hover-right' }}">
+			<span class="text-inherit" x-text="link.title"></span>
+            {{ svg src="{{ "arrow_right" }}" class="w-6 h-4 fill-current md:w-8 md:h-6" alt="" }}
+            
+            {{# underline #}}
+            <div class="h-0.5 bg-skin-base motion-safe:transition-all group-hover:bg-skin-primary absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+        </div>
+        
+        
+    {{# lined button with darkblue color #}}
+    {{ elseif button_type == "lined_dark" }}
+        <div class="{{ reverse ?= "flex-row-reverse" }} relative flex items-center h-8 gap-2 md:gap-4 px-2 text-base md:text-lg font-extrabold uppercase whitespace-nowrap cursor-pointer pointer-events-auto text-darkblue motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary hover:text-green {{ reverse ? 'svg-hover-left' : 'svg-hover-right' }}">
+            {{ label }}
+            {{ svg src="{{ icon ?? "arrow_right" }}" class="w-6 h-4 fill-current md:w-8 md:h-6" alt="" }}
+            
+            {{# underline #}}
+            <div class="h-0.5 bg-darkblue motion-safe:transition-all group-hover:bg-green absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+        </div>
+
+		
+	{{# lined button with base color for card (the button is not the actual link) #}}
+    {{ elseif button_type == "card_lined_base" }}
+        <div class="{{ reverse ?= "flex-row-reverse" }} relative flex items-center h-8 gap-2 md:gap-4 px-2 text-base md:text-lg font-extrabold uppercase whitespace-nowrap cursor-pointer pointer-events-auto text-skin-base motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary group-hover:text-skin-primary {{ reverse ? 'svg-hover-left' : 'svg-hover-right' }}">
+			{{ label }}
+            {{ svg src="{{ icon ?? "arrow_right" }}" class="w-6 h-4 fill-current md:w-8 md:h-6" alt="" }}
+            
+            {{# underline #}}
+            <div class="h-0.5 bg-skin-base motion-safe:transition-all group-hover:bg-skin-primary absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+        </div>
+
+
+    {{# lined button #}}
+    {{ else }}
+        <div class="{{ reverse ?= "flex-row-reverse" }} relative flex items-center h-8 gap-2 md:gap-4 px-2 text-lg font-extrabold uppercase whitespace-nowrap cursor-pointer pointer-events-auto text-skin-primary motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-primary hover:text-skin-accent {{ reverse ? 'svg-hover-left' : 'svg-hover-right' }}">
+            {{ label }}
+            {{ svg src="{{ icon ?? "arrow_right" }}" class="w-6 h-4 fill-current md:w-8 md:h-6" alt="" }}
+            
+            {{# underline #}}
+            <div class="h-0.5 bg-skin-primary motion-safe:transition-all group-hover:bg-skin-accent absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+        </div>
+    {{ /if }}
+            
     </{{ as or 'a' }}>
 {{ /if }}
 <!-- End: /components/_button.antlers.html -->

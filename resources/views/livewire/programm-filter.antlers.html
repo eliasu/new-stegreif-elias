@@ -1,0 +1,81 @@
+{{# lifewire need outer div wrapper #}}
+<div>
+    {{# filter bar #}}
+    <div class="flex flex-col flex-wrap items-start w-full xs:flex-row gap-x-16 gap-y-8 xs:gap-y-6">
+
+        {{# button group wrapper: current/past #}}
+        {{# single button past #}}
+        <div x-data="{ active: {{ livewire:entangle property='aktuell' }} }" class="flex flex-col gap-6 gap-y-2 xs:flex-row">
+            
+            <button class="relative flex items-center h-8 gap-2 px-2 text-base font-extrabold uppercase cursor-pointer pointer-events-auto group md:gap-4 md:text-lg whitespace-nowrap motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary hover:text-skin-accent" title="{{ title }}" aria-label="{{ title }}"
+                    :class="active ? 'text-skin-base' : 'text-skin-primary'"
+                    @click="active = ! active" >
+                
+                {{# button label #}}
+                {{ trans:strings.past }}
+
+                {{# underline #}}
+                <div :class="active ? 'bg-skin-base' : '!right-0 bg-skin-primary'" class="h-0.5 motion-safe:transition-all group-hover:bg-skin-accent absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+            </button>
+        </div>
+
+
+        {{# button group wrapper: tags #}}
+        {{# multi buttons taxo #}}
+        <div x-data="{
+            {{# here ist die gesamte logik drin #}}
+            {{# connects/syncs alpine var with php lifewire var $select in http/lifewire/filename.php #}}
+            select: {{ livewire:entangle property='selection' }},
+            toggle(value) {
+                if (this.select.includes(value)) {
+                    this.select = this.select.filter(item => item !== value)
+                } else { 
+                    this.select.push(value)
+                }
+            },
+            getStatus(value) {
+                return this.select.includes(value);
+            }
+        }"
+        class="flex flex-col gap-6 gap-y-2 xs:flex-row" >
+
+            {{# geht durch die taxonomien und generiert buttons, wichtig ist, dass der button ein value hat, da darüber die logik funzt #}}
+            {{ taxonomy:{ $filterTax } }}
+                {{# {{ partial:components/button as="button" value="{ slug }" button_type="lined_base_filter" label="{ title }" }} #}}
+                <button class="relative flex items-center h-8 gap-2 px-2 text-base font-extrabold uppercase cursor-pointer pointer-events-auto group md:gap-4 md:text-lg whitespace-nowrap motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary hover:text-skin-accent" value={{slug}} title="{{ title }}" aria-label="{{ title }}"
+                        :class="getStatus($el.value) ? 'text-skin-primary' : 'text-skin-base'"
+                        @click="toggle($el.value)" >
+                    
+                    {{# button label #}}
+                    {{title}}
+
+                    {{# underline #}}
+                    <div :class="getStatus($el.parentElement.value) ? '!right-0 bg-skin-primary' : 'bg-skin-base'" class="h-0.5 motion-safe:transition-all group-hover:bg-skin-accent absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+                </button>
+            {{ /taxonomy:{ $filterTax } }}
+        </div>
+        
+            
+    </div>
+
+    {{# production list wrapper #}}
+    <div class="flex flex-col transition-opacity duration-500 ease-in-out prod-container gap-y-8">
+    
+        {{ lwResults }}
+            {{ alternating = (index % 2) }}
+           
+            <div class="filter-item-wrapper">
+
+                {{ partial:components/bard_feature :alternate="alternating" reference_content="true" feature_type="big" }}
+
+            </div>
+        {{ /lwResults }}
+    
+    </div>
+
+    <div class="my-20 text-xl font-bold uppercase text-skin-primary" wire:loading.delay.shortest>
+        loading …
+    </div>
+
+</div>
+

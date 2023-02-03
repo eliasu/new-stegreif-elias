@@ -1,0 +1,21 @@
+title: Detail
+fields:
+  -
+    handle: headline
+    field: common.text_single
+    config:
+      display: Headline
+      localizable: true
+      width: 100
+  -
+    handle: description
+    field: article_details.article_text
+    config:
+      buttons:
+        - accent
+        - removeformat
+        - bold
+        - italic
+        - underline
+        - anchor
+      display: Description

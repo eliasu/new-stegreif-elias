@@ -1,31 +1,54 @@
 {{#
-    @name Footer
-    @desc The sites footer rendered on each page.
+	@name Footer
+	@desc The sites footer rendered on each page.
 #}}
 
 <!-- /layout/_footer.antlers.html -->
-<footer class="w-full py-4 mt-auto">
-    <div class="fluid-container flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between md:space-x-4 md:items-center ">
-        <div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 text-xs font-bold">
-            <span>
-                &copy; {{ configuration:copyright_since }}
-                {{ unless (now | format('Y')) == configuration:copyright_since }}
-                    - {{ now | format('Y') }}
-                    {{ /unless }}
-                {{ configuration:copyright_name ?? config:app:name }}
-            </span>
-
-            {{# Let's users reset their cookie consent when you use the cookie banner. #}}
-            {{ yield:reset_cookie_consent }}
+<footer class="w-full py-8 border-t-8 lg:py-20 bg-yellow border-darkblue">
+    
+    {{# footer wrapper inside #}}
+    <div class="flex flex-row flex-wrap items-center justify-between lg:flex-nowrap gap-x-20 gap-y-20 fluid-container">
+        
+        {{# form #}}
+        {{# {{ partial:components/newsletter_form form="contact" }} #}}
+        <div class="flex flex-col">
+            {{ partial:components/button as="a" class="self-start" button_type="lined_dark" link_type="url" url="https://interact.stegreif.org/newsletter/" label="{ trans:strings.get_newsletter }" }}
+           
+          
         </div>
-        {{ if social_media:social_media }}
-            <div class="flex space-x-2">
-                {{ social_media:social_media }}
-                    <a class="p-1 -m-1 text-neutral hover:text-primary focus:outline-none focus-visible:ring-2 ring-primary" href="{{ prefix }}{{ handle }}" rel="noopener{{ type == 'mastodon' ?= ' me' }}" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}" target="_blank">{{ svg :src="type" class="w-3 h-3 overflow-visible fill-current" alt="" aria-hidden="true" }}</a>
-                {{ /social_media:social_media }}
-            </div>
-        {{ /if }}
 
+       
+        
+        <div class="flex flex-col gap-4 lg:basis-3/5 ">
+            {{# footer social icons #}}
+            <ul class="flex gap-8 text-darkblue">
+                {{ if social_media:social_media }}
+                    {{ social_media:social_media }}
+                        <li class="relative block">
+                            <a class="w-8 h-8 text-darkblue hover:text-green focus:outline-none focus-visible:ring-2 ring-primary" href="{{ prefix }}{{ handle }}" rel="noopener" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}" target="_blank">{{ svg :src='type' class="w-8 h-8 overflow-visible fill-current" alt="" aria-hidden="true" }}</a>
+                        </li>
+                    {{ /social_media:social_media }}
+                {{ /if }}
+            </ul>
+            
+            {{# footer nav links #}}
+            <ul class="flex flex-row flex-wrap items-center gap-x-8 gap-y-2 text-darkblue">
+                {{ nav:footer }}
+                    <li class="relative block">
+                        <a class="block text-lg font-extrabold uppercase leading-s hover:text-green focus:outline-none focus-visible:ring-2 ring-primary whitespace-nowrap" href="{{ url }}">
+                            {{ title }}
+                        </a>
+                    </li>
+                {{ /nav:footer }}
+
+                {{# Let's users reset their cookie consent when you use the cookie banner. #}}
+                {{ yield:reset_cookie_consent }}
+            </ul>
+        </div>
+       
+    </div>
+    <div class="mt-20">
+        <img src="/site_assets/logos/logo_dark.png" class="max-w-[100px] ml-20" alt="{{ config:app:name }}"/>          
     </div>
 </footer>
 <!-- End: /layout/_footer.antlers.html -->

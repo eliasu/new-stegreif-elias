@@ -1,0 +1,21 @@
+title: 'Select Transition Theme'
+fields:
+  -
+    handle: select_transition_theme
+    field:
+      options:
+        bird: Birds
+        bechange: Bechange
+      multiple: false
+      clearable: false
+      searchable: false
+      taggable: false
+      push_tags: false
+      cast_booleans: false
+      default: bird
+      display: 'Select Transition Theme'
+      type: select
+      icon: select
+      listable: hidden
+      instructions_position: above
+      read_only: false

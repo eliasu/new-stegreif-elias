@@ -1,0 +1,29 @@
+title: 'Translation Item'
+fields:
+  -
+    handle: title
+    field:
+      input_type: text
+      antlers: false
+      display: Title
+      type: text
+      icon: text
+      instructions: 'Give a short descriptive key.'
+      width: 50
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: text
+    field:
+      input_type: text
+      antlers: false
+      display: Text
+      type: text
+      icon: text
+      instructions: 'Here comes the text to be translated.'
+      localizable: true
+      width: 50
+      listable: hidden
+      instructions_position: above
+      read_only: false

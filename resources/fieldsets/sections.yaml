@@ -1,0 +1,19 @@
+title: Sections
+fields:
+  -
+    handle: add_section
+    field:
+      fields:
+        -
+          import: section
+      mode: stacked
+      add_row: 'Add Section'
+      reorderable: true
+      display: 'Add Section'
+      type: grid
+      icon: grid
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      localizable: true
+      instructions: 'Add a new section and select the theme.'

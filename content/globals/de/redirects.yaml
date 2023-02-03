@@ -1,0 +1,25 @@
+redirects:
+  -
+    url_old: /konzerte
+    entry: f971080c-39a4-482d-a8ea-7e9bf7829075
+    response: '301'
+  -
+    url_old: /das-orchester
+    entry: 0c72885a-58b4-408e-973c-8a0957c15999
+    response: '301'
+  -
+    url_old: /produktionen
+    entry: c72b457f-66a2-4aa7-a7f2-1fc5a5df50a7
+    response: '301'
+  -
+    url_old: /education
+    entry: c72b457f-66a2-4aa7-a7f2-1fc5a5df50a7
+    response: '301'
+  -
+    url_old: /support
+    entry: a8d81bc7-b246-4ce2-93c7-09d8bd8e4346
+    response: '301'
+  -
+    url_old: /support/stegreif.family
+    entry: a8d81bc7-b246-4ce2-93c7-09d8bd8e4346
+    response: '301'

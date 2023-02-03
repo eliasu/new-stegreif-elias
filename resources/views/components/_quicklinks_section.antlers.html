@@ -1,0 +1,24 @@
+ {{# social icons and quick links wrapper #}}
+ {{ if quicklinks_enabled }}
+   
+    <div class="flex flex-col flex-wrap md:flex-row-reverse md:justify-end gap-x-20 gap-y-10">
+             
+    {{# quick links #}}
+    <div class="flex flex-wrap gap-x-8 gap-y-4">
+        {{ quick_links }}
+            {{ partial:components/button label="{anchor_name}" link_type="url" url="{current_url}#{anchor_id}" }}
+        {{ /quick_links }}
+    </div>
+
+    {{ if show_social }}
+        {{# social icons #}}
+        {{ if social_media:social_media && social_icons }}
+            <div class="flex gap-8">
+                {{ social_media:social_media }}
+                    <a class="w-8 h-8 text-skin-base hover:text-skin-accent focus:outline-none focus-visible:ring-2 ring-primary" href="{{ prefix }}{{ handle }}" rel="noopener" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}" target="_blank">{{ svg :src='type' class="w-8 h-8 overflow-visible fill-current" alt="" aria-hidden="true" }}</a>
+                {{ /social_media:social_media }}
+            </div>
+        {{ /if }}
+    {{ /if }}     
+    </div>
+{{ /if }}

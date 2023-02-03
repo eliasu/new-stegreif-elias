@@ -1,0 +1,12 @@
+title: Oboe
+team_tag_type: green
+filter_category: holzblasinstrumente
+updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+updated_at: 1657209853
+blueprint: team_tags
+localizations:
+  en:
+    title: Oboe
+    slug: oboe
+    updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+    updated_at: 1657210259

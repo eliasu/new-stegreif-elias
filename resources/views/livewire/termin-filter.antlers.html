@@ -1,0 +1,102 @@
+<div>
+    {{# filter bar #}}
+    <div class="flex flex-col flex-wrap items-start w-full mb-20 xl:mb-30 xs:flex-row gap-x-16 gap-y-8 xs:gap-y-6">
+
+        {{# button group wrapper: current/past #}}
+        {{# single button past #}}
+        <div x-data="{ active: {{ livewire:entangle property='aktuell' }} }" class="flex flex-col gap-6 gap-y-2 xs:flex-row">
+            
+            <button class="relative flex items-center h-8 gap-2 px-2 text-base font-extrabold uppercase cursor-pointer pointer-events-auto group md:gap-4 md:text-lg whitespace-nowrap motion-safe:transition leading-s focus:outline-none focus-visible:ring-2 ring-skin-primary hover:text-skin-accent" title="{{ title }}" aria-label="{{ title }}"
+                    :class="active ? 'text-skin-base' : 'text-skin-primary'"
+                    @click="active = ! active" >
+                
+                {{# button label #}}
+                {{ trans:strings.past }}
+
+                {{# underline #}}
+                <div :class="active ? 'bg-skin-base' : '!right-0 bg-skin-primary'" class="h-0.5 motion-safe:transition-all group-hover:bg-skin-accent absolute left-0 bottom-0 right-[60%] group-hover:right-[50%]"></div>
+            </button>
+        </div>
+        
+
+        {{# button group wrapper: dropdown #}}
+        <div x-data="{ select: {{ livewire:entangle property='selection' }} }" class="flex flex-col gap-6 gap-y-2 xs:flex-row">
+        
+            {{# dropdown #}}
+            {{ partial:components/select label="{ trans:strings.area }" model="select" }}
+
+                {{# add select options #}}
+                {{ taxonomy:{ $filterTax } }}
+                    <option value="{{slug}}">{{title}}</option>
+                {{ /taxonomy:{ $filterTax } }}
+
+            {{ /partial:components/select }}
+        </div>
+            
+    </div>
+
+    {{# date cards grid wrapper #}}
+    <div class="grid items-start w-full grid-cols-pill-s lg:grid-cols-pill-m 2xl:grid-cols-pill-l gap-x-8 gap-y-20">
+        
+        {{# all dates #}}
+        {{ lwResults }}
+            
+            {{# wrapper to get tags with links (not inside another a tag)  #}}
+            <div class="relative group">
+
+                {{# tags and title #}}
+                <div class="absolute pointer-events-none left-4 right-4 bottom-20 z-front">
+    
+                    {{# tags  #}}
+                    {{ partial:components/tags class="mb-4 pointer-events-auto z-front" }}
+                    
+                    {{# headline or title fallback #}}
+                    {{ partial:typography/h4 content="{ title }" class="hyphens group-hover:text-skin-primary" }}
+                </div>
+
+                {{# dates card #}}
+                <a href="{{ url }}" class="relative flex flex-col items-start p-4">
+
+                    {{# time #}}
+                    {{ locales self="false" }}
+                        {{ if current == "de" }} 
+                            {{ partial:typography/p content="Ab { time format="H.i" } Uhr" class="mb-0 sm:mb-1" }}
+                        {{ else }} 
+                                {{ partial:typography/p content="{ time format="g.i a" }" class="mb-0 xs:mb-1" }} 
+                        {{ /if }}
+                    {{ /locales  }}
+                    
+                    {{# date #}}
+                    {{ partial:typography/h3 class="pointer-events-auto" content="{ date_field iso_format="DD.MM.YYYY" }" }}
+                    
+                    {{# square spacer for height #}}
+                    <div class="flex flex-col w-full h-full pointer-events-none aspect-w-4 aspect-h-5"></div>
+
+                    {{# link to detail view #}}
+                    {{ partial:components/button button_type="card_lined_base" as="button" label="{ trans:strings.more }" }}
+
+                    {{# media wrapper #}}
+                    <div class="absolute inset-0 overflow-hidden motion-safe:transition-[inset_opacity] rounded-full group-hover:inset-2 group-hover:opacity-60 z-behind">
+                    
+                        {{# image #}}
+                        {{ if header_select == "image" }}
+                            {{ partial:components/picture nocaption="true" tint="dark" :image="header_image" cover="true" sizes="(min-width: 768px) 35vw, 90vw" }}
+                        
+                        {{# video #}}
+                        {{ else }}
+                            {{ partial:components/video tint="dark" :youtube_url="header_video" }}
+                        {{ /if }} 
+                    </div>
+                </a>    
+            </div>
+            
+        {{ /lwResults }}
+    </div>
+
+
+    <div class="my-20 text-xl font-bold uppercase text-skin-primary" wire:loading.delay.shortest>
+        loading …
+    </div>
+            
+</div>
+

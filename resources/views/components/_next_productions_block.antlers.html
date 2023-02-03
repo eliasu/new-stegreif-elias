@@ -1,0 +1,30 @@
+{{#
+	@name next productions block
+	@desc The next productions block component.
+#}}
+
+<!-- /components/_next_productions_block.antlers.html -->
+<div class="flex flex-col gap-8 fluid-container">
+
+    {{# productions headline #}}
+    {{ partial:typography/h2 :content="headline_productions" }}
+
+    {{# all productions #}}
+    <div class="flex flex-col gap-y-8">
+        {{# left right variable #}}
+        {{ alternating = true }}
+        
+        {{ related_productions }}
+
+            {{# feature block left right #}}
+            {{ partial:components/bard_feature :alternate="alternating" reference_content="true" feature_type="big" }}
+            {{ alternating = !alternating }}
+
+        {{ /related_productions }}
+    </div>
+
+    {{# link to detail view #}}
+    {{ partial:components/button label="{ trans:strings.all_productions }" class="self-center" button_type="background" link_type="entry" :entry="all_productions_page" }}
+    
+</div>
+<!-- End: /components/_next_productions_block.antlers.html --> 

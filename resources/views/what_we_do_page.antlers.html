@@ -1,0 +1,44 @@
+<!-- /what_we_do.antlers.html -->
+<main class="relative w-full" id="content"> 
+
+    {{# Header #}}
+    {{ partial:components/header social_icons="true" }}
+
+
+    <div id="programme" class="h-0"></div>
+    {{# Programme section #}}
+    {{ partial:layout/section color="{ theme_selector_programme }" }}
+        
+        {{# current productions block #}}
+        {{ partial:components/productions_block type="programme" show_header_all="true" :headline="section_headline_programme" }}
+    
+    {{ /partial:layout/section }}
+
+
+    <div id="reihen" class="h-0"></div>
+    {{# Reihen section #}}
+    {{ partial:layout/section color="{ theme_selector_reihen }" }}
+
+        {{# current collections block #}}
+        {{ partial:components/productions_block type="reihen" show_header_all="true" :headline="section_headline_reihen" }}
+            
+    {{ /partial:layout/section }}
+
+    <div id="education" class="h-0"></div>
+    {{# Education section #}}
+    {{ partial:layout/section color="{ theme_selector_education }" }}
+
+        {{# current education block #}}
+        {{ partial:components/productions_block type="education"  show_header_all="true" :headline="section_headline_education" }}
+    
+    {{ /partial:layout/section }}
+
+    {{# if there is additional content #}}
+    {{ add_section }}
+        {{ partial:layout/section color="{ theme_selector }" }}
+            {{ partial:components/bard handle="{ article }" }}
+        {{ /partial:layout/section }}
+    {{ /add_section }}
+    
+</main>
+<!-- End: /what_we_do.antlers.html -->

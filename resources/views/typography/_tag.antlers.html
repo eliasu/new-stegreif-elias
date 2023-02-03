@@ -1,0 +1,22 @@
+{{#
+	@name Tag
+	@desc The typography tag partial to render a paragraph with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<!-- /typography/_tag.antlers.html -->
+<{{ as or 'div' }} 
+	{{ if as == "a" }}{{ !faux ?= { partial:snippets/button_attributes } }}{{ /if }}
+	class="px-2 py-1 text-xs xs:text-sm uppercase leading-100 
+		{{ if as == "a" }} hover:bg-light hover:text-darkblue motion-safe:transition-colors cursor-pointer {{ /if }}
+		{{ if color == "green" }} bg-green text-light
+		{{ elseif color == "yellow" }} bg-yellow text-darkblue
+		{{ elseif color == "dark" }} bg-darkblue text-light
+		{{ elseif color == "light" }} bg-light text-darkblue
+		{{ elseif color == "inverted" }} bg-skin-inverted text-skin-base
+		{{ elseif color == "base" }} bg-skin-base text-skin-inverted
+		{{ elseif color == "alpine" }}
+		{{ else }} bg-yellow text-darkblue {{ /if }}
+		{{ class }}"
+	{{ slot }}
+>{{ content | nl2br }}</{{ as or 'div' }}>
+<!-- End: /typography/_tag.antlers.html -->

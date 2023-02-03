@@ -1,0 +1,46 @@
+{{#
+	@name productions block
+	@desc The productions block component.
+
+    @ parameters 
+        show => (int - limits the displayed items falls back to unlimited)
+        start => if start is set to "right" collection will start right
+#}}
+
+
+{{# wichtig für livewire #}}
+{{ section:head }}
+  {{ livewire:styles }}
+{{ /section:head }}
+{{ section:body }}
+  {{ livewire:scripts }}
+{{ /section:body }}
+
+<!-- /components/_productions_block.antlers.html -->
+<div class="flex flex-col gap-8 fluid-container">
+
+    {{# productions headline #}}
+    {{ if show_header }}
+        {{ partial:typography/h2 :content="headline_productions" }}
+    {{ elseif show_header_all }}
+        {{ partial:typography/h2 :content="headline" }}
+
+        {{# type wird aus dem page_template what_we_do gespeist, can have a preselection "preselection" => ["chamber"]
+        WTF it looks like there must be a space between the last item and parentecse otherwise dont work site:short_locale" "] <-- important
+        #}}
+        {{# {{ nocache }}  #}}
+            {{ livewire:programm-filter
+                :config='[ "type" => type, "tax" => "tags", "currLocale" => site:short_locale
+                {{# , "preselection" => filterActive  #}}
+                ]'  
+            }}
+        {{# {{ /nocache }}  #}}
+
+    {{ /if}}
+
+ 
+    {{# link to detail view #}}
+    {{ link_all ?= { partial:components/button label="{ trans:strings.all_productions }" class="self-center" button_type="background" link_type="entry" :entry="all_productions_page" } }}
+     
+</div>
+<!-- End: /components/_productions_block.antlers.html --> 

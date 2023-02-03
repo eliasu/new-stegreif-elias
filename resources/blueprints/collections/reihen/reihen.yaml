@@ -1,0 +1,97 @@
+title: Reihen
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          localizable: true
+          listable: true
+          display: Title
+          validate:
+            - required
+      -
+        import: header
+      -
+        handle: teaser_text
+        field: common.teaser_text
+      -
+        import: details
+      -
+        import: section_detail
+      -
+        handle: additional_sections
+        field:
+          display: 'Additional Sections'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        import: sections
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+          generate: true
+          listable: hidden
+          display: Slug
+          validate:
+            - required
+      -
+        import: select_transition_theme
+      -
+        handle: aktuell
+        field: common.aktuell
+      -
+        handle: featured
+        field:
+          default: false
+          display: Featured
+          type: toggle
+          icon: toggle
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: tags
+        field:
+          type: terms
+          taxonomies:
+            - tags
+          display: Tags
+          mode: select
+      -
+        handle: related_programme
+        field: common.entry
+        config:
+          max_items: 99
+          localizable: false
+          display: 'Related Programme'
+          create: false
+          collections:
+            - programme
+      -
+        handle: template
+        field:
+          default: single_page
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false

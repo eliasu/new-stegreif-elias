@@ -1,0 +1,4 @@
+title: bard_buttons
+fields:
+  -
+    import: buttons

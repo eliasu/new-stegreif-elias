@@ -1,0 +1,125 @@
+hide: true
+title: 'Who we are Page'
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          localizable: true
+          listable: true
+          display: 'Page Title'
+          validate:
+            - required
+          instructions_position: above
+          read_only: false
+          antlers: false
+      -
+        import: header
+      -
+        handle: introduction_section
+        field:
+          display: 'Introduction Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: select_section_theme_intro
+        field: section.theme_selector
+      -
+        handle: introduction_content
+        field: article.article
+        config:
+          buttons:
+            - bigger
+            - smaller
+            - h2
+            - h3
+            - h4
+            - h5
+            - accent
+            - removeformat
+            - anchor
+            - bold
+            - italic
+            - underline
+          display: 'Introduction Content'
+          validate:
+            - required
+      -
+        handle: orchestra_section
+        field:
+          display: 'Orchestra Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: select_section_theme_orchestra
+        field: common.theme_selector
+        config:
+          width: 50
+      -
+        handle: section_headline_orchestra
+        field: common.text_single
+        config:
+          display: 'Section Headline'
+          width: 50
+      -
+        handle: additional_content
+        field:
+          display: 'Additional Content'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        import: sections
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+          generate: true
+          listable: hidden
+          display: Slug
+          validate:
+            - required
+            - 'unique_entry_value:{collection},{id},{site}'
+      -
+        import: select_transition_theme
+      -
+        handle: parent
+        field:
+          type: entries
+          collections:
+            - pages
+          max_items: 1
+          listable: false
+          localizable: true
+      -
+        handle: template
+        field:
+          default: who_we_are_page
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false

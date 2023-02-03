@@ -1,0 +1,26 @@
+
+{{#
+	@name Page
+	@desc The Page template.
+#}}
+
+<!-- /page.antlers.html -->
+<main class="relative w-full" id="content"> 
+
+    {{# Header #}}
+    {{ partial:components/header social_icons="false" }}
+
+    {{# first section #}}
+    {{ partial:layout/section color="{ theme_selector }" }}
+        {{ partial:components/bard handle="{ article }" }}
+    {{ /partial:layout/section }}
+
+    {{# if there are additional sections #}}
+    {{ add_section }}
+        {{ partial:layout/section color="{ theme_selector }" }}
+            {{ partial:components/bard handle="{ article }" }}
+        {{ /partial:layout/section }}
+    {{ /add_section }}
+    
+</main>
+<!-- End: /page.antlers.html -->

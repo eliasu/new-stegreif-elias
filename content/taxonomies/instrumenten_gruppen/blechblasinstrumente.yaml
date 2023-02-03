@@ -1,0 +1,10 @@
+title: Blechblasinstrumente
+updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+updated_at: 1670952105
+blueprint: instrumenten_gruppen
+localizations:
+  en:
+    title: Brass
+    slug: blechblasinstrumente
+    updated_by: f6128d7d-0471-44e5-b89a-e3213d7a0925
+    updated_at: 1670952122

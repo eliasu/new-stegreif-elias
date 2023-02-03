@@ -1,0 +1,30 @@
+{{#
+	@name dates block
+	@desc The date block component.
+#}}
+
+{{# wichtig für livewire #}}
+{{ section:head }}
+  {{ livewire:styles }}
+{{ /section:head }}
+{{ section:body }}
+  {{ livewire:scripts }}
+{{ /section:body }}
+
+<!-- /components/_dates_block.antlers.html -->
+<div class="flex flex-col fluid-container gap-y-20 xl:gap-y-40">
+
+     {{# type wird aus dem page_template what_we_do gespeist, can have a preselection "preselection" => ["chamber"]
+        WTF it looks like there must be a space between the last item and parentecse otherwise dont work site:short_locale" "] <-- important
+        #}}
+        {{# {{ nocache }}  #}}
+          {{ livewire:termin-filter
+              :config='[ "type" => "termine", "tax" => "bundeslaender", "currLocale" => site:short_locale
+              {{# , "preselection" => filterActive  #}}
+              ]'  
+          }}
+        {{# {{ /nocache }}  #}}
+    
+   
+</div>
+<!-- End: /components/_dates_block.antlers.html -->

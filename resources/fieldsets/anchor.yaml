@@ -1,0 +1,7 @@
+title: Anchor
+fields:
+  -
+    handle: anchor
+    field: common.text_single
+    config:
+      display: Anchor

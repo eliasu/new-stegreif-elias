@@ -1,21 +1,30 @@
 {{#
-    @name Error: 404
-    @desc The 404 error template.
+	@name Error: 404
+	@desc The 404 error template.
 #}}
 
 {{# Redirect if current_url is in the Redirects global. #}}
 {{ redirects:redirects | where('url_old', {current_uri}) }}
-    {{ if internal_url }}
-        {{ redirect :to="internal_url:url" response="{response}" }}
-    {{ elseif external_url }}
-        {{ redirect :to="external_url" response="{response}" }}
-    {{ /if }}
+    {{ redirect to="{entry:url}" response="{response}" }}
 {{ /redirects:redirects }}
 
 <!-- /errors/404.antlers.html -->
-<main class="outer-grid" id="content">
-    {{ page_builder scope="block" }}
-        {{ partial src="page_builder/{type}" }}
-    {{ /page_builder }}
+<main class="relative w-full" id="content"> 
+
+    {{# Header #}}
+    {{ partial:components/header social_icons="true" }}
+
+    {{# first section and additional extend #}}
+    {{ partial:layout/section color="{ theme_selector }" }}
+    
+        <div class="flex flex-col gap-y-8 fluid-container"> 
+            
+            {{# show bard field with sidebar #}}
+            <div class="flex flex-col-reverse md:flex-row gap-y-20">
+                {{ partial:components/bard handle="{ article }" }}
+            </div>
+
+        </div>
+    {{ /partial:layout/section }}   
 </main>
 <!-- End: /errors/404.antlers.html -->

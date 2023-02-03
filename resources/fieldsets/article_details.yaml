@@ -1,0 +1,43 @@
+title: 'Article Details'
+fields:
+  -
+    handle: article_text
+    field:
+      buttons:
+        - accent
+        - removeformat
+        - bold
+        - italic
+        - underline
+        - anchor
+      save_html: false
+      toolbar_mode: fixed
+      link_noopener: false
+      link_noreferrer: false
+      target_blank: false
+      reading_time: true
+      fullscreen: true
+      allow_source: true
+      type: bard
+      localizable: true
+      listable: hidden
+      display: Article
+      replicator_preview: false
+      always_show_set_button: true
+      container: assets
+      enable_input_rules: true
+      enable_paste_rules: true
+      instructions_position: above
+      read_only: false
+      link_collections:
+        - pages
+        - termine
+        - reihen
+        - programme
+      antlers: false
+      sets:
+        bard_buttons:
+          display: Buttons
+          fields:
+            -
+              import: bard_buttons

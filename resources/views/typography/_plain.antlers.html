@@ -1,0 +1,8 @@
+{{#
+	@name Plain
+	@desc The typography plain text partial to render a paragraph with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<!-- /typography/_plain.antlers.html -->
+<{{ as or 'div' }} class="mt-0 last:mb-0 {{ class }}" {{ slot }}>{{ text | nl2br }}</{{ as or 'div' }}>
+<!-- End: /typography/_plain.antlers.html -->

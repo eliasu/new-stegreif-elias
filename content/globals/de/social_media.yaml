@@ -1,0 +1,16 @@
+social_media:
+  -
+    handle: stegreiforchester
+    prefix: 'https://www.facebook.com/'
+    type: facebook
+    enabled: true
+  -
+    handle: stegreif
+    prefix: 'https://www.instagram.com/'
+    type: instagram
+    enabled: true
+  -
+    handle: channel/UCiOT6cSr9H8k4JjzeR7cp6g
+    prefix: 'https://www.youtube.com/'
+    type: youtube
+    enabled: true

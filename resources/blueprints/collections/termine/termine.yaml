@@ -1,0 +1,117 @@
+title: Termine
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          localizable: true
+          listable: true
+          display: Title
+          validate:
+            - required
+      -
+        import: header
+      -
+        handle: teaser_text
+        field: common.teaser_text
+      -
+        import: details
+      -
+        import: section_detail
+      -
+        handle: additional_sections
+        field:
+          display: 'Additional Sections'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        import: sections
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+      -
+        import: select_transition_theme
+      -
+        handle: date_field
+        field:
+          mode: single
+          time_enabled: false
+          time_seconds_enabled: false
+          full_width: false
+          inline: false
+          columns: 1
+          rows: 1
+          display: Date
+          type: date
+          icon: date
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: time
+        field:
+          seconds_enabled: false
+          display: Time
+          type: time
+          icon: time
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: tags
+        field:
+          type: terms
+          taxonomies:
+            - tags
+          display: Tags
+          mode: select
+      -
+        handle: related_programm
+        field: common.entry
+        config:
+          max_items: 1
+          localizable: false
+          display: 'Related Programm'
+          create: false
+          collections:
+            - programme
+      -
+        handle: template
+        field:
+          default: single_page
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: bundeslaender
+        field:
+          type: terms
+          taxonomies:
+            - bundeslaender
+          display: Bundesländer
+          mode: select
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo

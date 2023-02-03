@@ -1,0 +1,38 @@
+title_separator: '>'
+site_name: Stegreif
+noindex_local: true
+noindex_staging: true
+noindex_production: false
+collection_defaults:
+  -
+    collection: pages
+    fallback: custom_text
+    custom_text: 'Das STEGREIF.orchester hat es sich auf die Fahnen geschrieben, dem Publikum ganz neue Herangehensweisen an klassische Musik zu ermöglichen.'
+hreflang_auto: true
+json_ld_type: organization
+organization_name: Stegreif
+breadcrumbs: false
+use_social_image_generation: true
+social_images_collections:
+  - programme
+  - neuigkeiten
+  - pages
+  - reihen
+  - termine
+og_image: social-image.jpg
+twitter_image: twitter-image.jpg
+sitemap_collections:
+  - pages
+trackers_local: false
+trackers_staging: false
+trackers_production: true
+use_google_site_verification: false
+use_fathom: false
+fathom_use_custom_domain: false
+use_cloudflare_web_analytics: false
+tracker_type: gtag
+google_analytics: G-6CDDHC18CK
+anonymize_ip: true
+use_cookie_banner: true
+display_style: right
+cookie_revoke_before: '2022-07-12'

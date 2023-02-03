@@ -1,0 +1,97 @@
+{{#
+	@name Button attributes
+	@desc A single button component. Faux is used when a button is displayed inside a link (for example in link blocks).
+#}}
+
+<!-- /components/_orchestra_modal.antlers.html -->
+{{# person modal #}}
+<div class="fixed inset-4 lg:inset-8 z-nav" x-data x-show="$store.modal.open" x-cloak x-transition :aria-expanded="$store.modal.open" x-trap.inert.noscroll="$store.modal.open" @click.outside="$store.modal.open = false" >
+        
+    <div class="relative grid w-full h-full overflow-y-auto theme-dark lg:grid-rows-1 lg:grid-cols-2 bg-darkblue">
+
+        {{# back button for mobile #}}
+        <div class="fixed p-4 z-nav lg:hidden md:p-8">
+            {{ partial:components/button as="button" reverse="true" icon="arrow_left" button_type="lined_base" label="{ trans:strings.back }" }}
+                    @click.prevent="$store.modal.open = false"
+            {{ /partial:components/button }}
+        </div>
+
+        {{# image wrapper #}}
+        <div class="relative h-full">
+            <img
+                class="object-cover w-full h-full max-h-[50vh] lg:max-h-screen"
+                :style="{ 'object-position': $store.modal.image.focus }"
+                :src="$store.modal.image.url"
+                :alt="$store.modal.image.alt"
+                :width="$store.modal.image.width"
+                :height="$store.modal.image.height"
+                loading="lazy">
+            
+            <template x-if="$store.modal.image.caption">
+                    <div x-text="$store.modal.image.caption" class="absolute self-start px-2 py-1 text-xs uppercase left-4 bottom-4 z-front xs:text-sm leading-100 bg-light text-darkblue"></div>
+            </template>
+        </div>
+
+        {{# content wrapper #}}
+        <div class="flex flex-col items-start justify-between h-full gap-20 p-4 md:p-8 bg-darkblue">
+            
+            {{# back button #}}
+            {{ partial:components/button class="hidden lg:block" as="button" reverse="true" icon="arrow_left" button_type="lined_base" label="{ trans:strings.back }" }}
+                @click.prevent="$store.modal.open = false"  
+            {{ /partial:components/button }}
+
+            {{# main content #}}
+            <div class="flex flex-col items-start gap-6 md:gap-8">
+                {{# tags  #}}
+                <div class="flex items-start">
+                    <template x-for="teamTag in $store.modal.teamTags">
+                        {{# add links via Alpine #}}
+                        {{ partial:typography/tag color="alpine" content="Test" }}
+                            x-text="teamTag.content"
+                            :class="{ 'bg-green text-light' : teamTag.color == 'green', 'bg-yellow text-darkblue' : teamTag.color == 'yellow', 'bg-darkblue text-light' : teamTag.color == 'dark' }"
+                        {{ /partial:typography/tag }}
+                    </template>
+                </div>
+
+                {{# name #}}
+                {{ partial:typography/h3 }} x-text="$store.modal.title" {{ /partial:typography/h3 }}
+                
+                {{# text #}}
+                {{ partial:typography/p }} x-html="$store.modal.description" {{ /partial:typography/p }}
+            </div>
+
+            {{# display extras only if set #}}
+            <div class="flex flex-col gap-8" x-show="$store.modal.showFunFact || $store.modal.showFunFact">
+                
+                {{# display fun fact #}}
+                <div class="flex flex-col items-start" x-show="$store.modal.showFunFact">
+                    {{ partial:typography/h6 content="{ trans:strings.fun_fact }" class="mb-2 text-yellow" }}
+                    {{ partial:typography/p class="mb-8"}}
+                        x-html="$store.modal.funFact"
+                    {{ /partial:typography/p }}
+                </div>
+                
+                {{# display links #}}
+                <div class="flex flex-col items-start" x-show="$store.modal.showLinks">
+                    
+                    {{# links headline #}}
+                    {{ partial:typography/h6 content="{ trans:strings.further_links }" class="mb-2 text-yellow" }}
+                    
+                    {{# links wrapper #}}
+                    <div class="flex gap-8">
+                        <template x-for="link in $store.modal.links">
+                            {{# add links via Alpine #}}
+                            {{ partial:components/button button_type="lined_base_modal" label="noLabel" link_type="url" }}
+                                :href="link.url"
+                                target="_blank"
+                                :title="link.title"
+                                :aria-label="link.title"
+                            {{ /partial:components/button }}
+                        </template>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End: /components/_orchestra_modal.antlers.html -->

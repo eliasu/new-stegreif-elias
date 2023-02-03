@@ -1,0 +1,133 @@
+hide: true
+title: 'What we do Page'
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          localizable: true
+          listable: true
+          display: 'Page Title'
+          validate:
+            - required
+          instructions_position: above
+          read_only: false
+          antlers: false
+      -
+        import: header
+      -
+        handle: programme_section
+        field:
+          display: 'Programme Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: theme_selector_programme
+        field: common.theme_selector
+        config:
+          width: 50
+      -
+        handle: section_headline_programme
+        field: common.text_single
+        config:
+          display: 'Section Headline'
+          width: 50
+      -
+        handle: reihen_section
+        field:
+          display: 'Reihen Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: theme_selector_reihen
+        field: common.theme_selector
+        config:
+          width: 50
+      -
+        handle: section_headline_reihen
+        field: common.text_single
+        config:
+          display: 'Section Headline'
+          width: 50
+      -
+        handle: education_section
+        field:
+          display: 'Education Section'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: theme_selector_education
+        field: common.theme_selector
+        config:
+          width: 50
+      -
+        handle: section_headline_education
+        field: common.text_single
+        config:
+          display: 'Section Headline'
+          width: 50
+      -
+        handle: additional_content
+        field:
+          display: 'Additional Content'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        import: sections
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+          generate: true
+          listable: hidden
+          display: Slug
+          validate:
+            - required
+            - 'unique_entry_value:{collection},{id},{site}'
+      -
+        import: select_transition_theme
+      -
+        handle: parent
+        field:
+          type: entries
+          collections:
+            - pages
+          max_items: 1
+          listable: false
+          localizable: true
+      -
+        handle: template
+        field:
+          default: what_we_do_page
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false

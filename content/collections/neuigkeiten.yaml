@@ -1,0 +1,15 @@
+title: Neuigkeiten
+sites:
+  - de
+  - en
+propagate: true
+template: page
+layout: layout
+mount: e1bace27-af9e-454e-a661-fe249340ae1d
+revisions: false
+route: '/{mount}/{slug}'
+date: true
+sort_dir: asc
+date_behavior:
+  past: public
+  future: private

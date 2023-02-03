@@ -1,0 +1,72 @@
+{{#
+	@name related dates block
+	@desc The related date block component.
+
+    @ parameters 
+        show_header (bool - shows headline and "all dates" link)
+        show (int - limits the displayed items falls back to 6)
+#}}
+
+<!-- /components/_related_dates_block.antlers.html -->
+
+{{# only show this block if there are related termine => only with programme/reihen #}}
+{{ if related_termine }}
+    {{# create array with all related dates #}}
+    {{# only get dates which are today or in the future => is_after yesterday #}}
+    {{ collection:termine related_programm:is="{origin_id ?? id}" date_field:is_after="yesterday" sort="date_field" limit="3" as='all_termine'}}
+            
+            {{# only show the whole block if the array has some dates #}}
+            {{ if all_termine | count != "0" }}
+
+                <div class="relative flex flex-col fluid-container">
+                            
+                    {{# block header with link to all dates #}}
+                    <div class="flex flex-row flex-wrap items-center justify-between mb-20 md:px-12 gap-y-4 gap-x-8 lg:px-20">
+                        {{ partial:typography/h3 content="{ trans:strings.next_dates }" class="text-skin-primary" }}
+                    </div>
+                    
+                    {{# date cards grid wrapper #}}
+                    <div class="grid grid-cols-1 md:px-12 gap-x-12 xs:grid-cols-2 xl:grid-cols-3 gap-y-20 2xl:gap-x-20 lg:px-20">
+
+                        {{ all_termine }}
+                            
+                            {{# date card #}}
+                            <div class="flex flex-col items-start">
+
+                                {{# time #}}
+                                {{ locales self="false" }}
+                                    {{ if current == "de" }} {{ partial:typography/p content="Ab { time format="H.i" } Uhr" class="mb-0 sm:mb-1" }}
+                                    {{ else }} {{ partial:typography/p content="{ time format="G.i a" }" class="mb-0 xs:mb-1" }} {{ /if }}
+                                {{ /locales  }}
+                                
+                                {{# date #}}
+                                {{ partial:typography/h3 content={ date_field iso_format="DD.MM.YYYY" } class="mb-4 sm:mb-6" }}
+                                
+                                {{# tags  #}}
+                                {{ partial:components/tags class="mb-4" }}
+
+                                {{# headline or title fallback #}}
+                                {{ partial:typography/h4 content="{ title }" class="mb-6 hyphens" }}
+                                
+                                {{# link to detail view #}}
+                                {{ partial:components/button button_type="lined_base" label="{ trans:strings.more }" link_type="url" entry="{ url }" }}
+                                
+                            </div>
+                            
+
+                            {{# background media #}}
+                            <div class="absolute inset-x-0 pointer-events-none -inset-y-40 z-behind rad-mask-2">
+                                
+                                {{# background image #}}
+                                {{ partial:components/picture nocaption="true" image="/site_assets/bg/download.jpg" tint="dark" cover="true" sizes="(min-width: 768px) 100vw, 100vw" }}
+                                {{# <img src="/site_assets/logos/logo_for_{{ header_theme_selector }}.png" class="absolute -top-6 left-4 lg:top-6 lg:left-20" alt="{{ config:app:name }}"/> #}}
+                            </div>
+                            
+                        {{ /all_termine }}
+                    </div>
+                </div>
+            {{ /if }}
+        
+    {{ /collection:termine }}
+{{ /if }}
+<!-- End: /components/_related_dates_block.antlers.html -->

@@ -1,0 +1,118 @@
+title: Programme
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          localizable: true
+          listable: true
+          display: Title
+          validate:
+            - required
+      -
+        import: header
+      -
+        handle: teaser_text
+        field: common.teaser_text
+      -
+        import: details
+      -
+        import: section_detail
+      -
+        handle: additional_sections
+        field:
+          display: 'Additional Sections'
+          type: section
+          icon: section
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        import: sections
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+          generate: true
+          listable: hidden
+          display: Slug
+          validate:
+            - required
+      -
+        import: select_transition_theme
+      -
+        handle: aktuell
+        field: common.aktuell
+      -
+        handle: featured
+        field:
+          default: false
+          display: Featured
+          type: toggle
+          icon: toggle
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: select_type
+        field: common.select_type
+        config:
+          options:
+            programm: Programm
+            education: Education
+          default: programm
+      -
+        handle: tags
+        field:
+          type: terms
+          taxonomies:
+            - tags
+          display: Tags
+          mode: select
+          instructions_position: above
+          listable: hidden
+          read_only: false
+          create: true
+      -
+        handle: related_reihe
+        field: common.entry
+        config:
+          localizable: false
+          display: 'Related Reihe'
+          create: false
+          collections:
+            - reihen
+      -
+        handle: related_termine
+        field: common.entry
+        config:
+          max_items: 100
+          localizable: false
+          display: 'Related Termine'
+          create: true
+          collections:
+            - termine
+      -
+        handle: template
+        field:
+          default: single_page
+          display: template
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          read_only: false

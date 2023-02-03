@@ -1,63 +1,34 @@
 {{#
-    @name Video
-    @desc The video component. A sizeable YouTube or Vimeo video rendered in a responsive container with an optional caption.
+	@name Video
+	@desc The video component. A sizeable YouTube or Vimeo video rendered in a responsive container with an optional caption.
     @set page.article.video
 #}}
 
 <!-- /components/_video.antlers.html -->
-{{ cookie_embeds =
-    (environment == 'local' && seo:trackers_local && seo:embeds) or
-    (environment == 'staging' && seo:trackers_staging && seo:embeds) or
-    (environment == 'production' && seo:trackers_production && seo:embeds)
-}}
-<div
-    {{ if cookie_embeds }}
-        x-data="embeds"
-        x-init="validateConsent()"
-        @embeds.window="validateConsent()"
+<div class="relative w-full h-full">
+    
+    {{#  youtube embed with sound #}}
+    {{ if sound }}
+        <div class="plyr__video-embed video_sound">
+            <iframe
+                src="{{youtube_url}}"
+                allowfullscreen
+                allowtransparency
+                allow="autoplay"
+                data-plyr-config='{ "youtuber": "{rel: 0, showinfo: 0, iv_load_policy: 3, modestbranding: 1, controls: 0, }" }'
+            ></iframe>
+        </div>
+
+    {{# video with no sound #}}
+    {{ else }}
+        <video autoplay muted loop class="absolute inset-0 object-cover w-full h-full pointer-events-none" data-yt2html5="{{ youtube_url }}"></video>
     {{ /if }}
-    class="
-        not-prose
-        {{ switch(
-            (size == 'md') => 'size-md',
-            (size == 'lg') => 'size-lg',
-            (size == 'xl') => 'size-xl',
-            () => 'size-md'
-        )}}
-    "
->
-    <div class="relative aspect-video">
-        {{ if cookie_embeds }}
-            <div
-                x-show="!$store.cookieBanner.consent || !$store.cookieBanner.embeds"
-                class="absolute z-10 inset-0 p-6 flex justify-center items-center bg-neutral/10 text-neutral/80"
-            >
-                <a @click.prevent="$store.cookieBanner.setConsent(null)" href="#" class="p-1 -m-1 underline focus:outline-none focus-visible:ring-2 ring-primary">
-                    {{ trans:strings.cookie_embeds_disabled }}
-                </a>
-            </div>
-        {{ /if }}
-        <iframe x-ref="iframe" class="absolute top-0 left-0 w-full h-full" width="100%" data-src="{{ youtube_url | embed_url }}" {{ unless cookie_embeds }}src="{{ youtube_url | embed_url }}"{{ /unless}} height="auto" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
 
-    {{ partial:typography/caption }}
+    {{ partial:snippets/image_tint }}
 
-    {{ if cookie_embeds }}
-        {{ once }}
-            <script>
-                document.addEventListener('alpine:initializing', () => {
-                    Alpine.data('embeds', () => {
-                        return {
-                            validateConsent: function() {
-                                this.$store.cookieBanner.consent && this.$store.cookieBanner.embeds
-                                    ? this.$refs.iframe.src = this.$refs.iframe.getAttribute('data-src')
-                                    : this.$refs.iframe.src = ''
-                            }
-                        }
-                    })
-                })
-            </script>
-        {{ /once }}
+    {{# add image caption if set #}}
+    {{ if !nocaption && media_caption }}
+        {{ partial:typography/tag class="absolute self-start right-4 top-4 z-front" content="{ media_caption }" color="inverted" }}
     {{ /if }}
 </div>
 <!-- End: /components/_video.antlers.html -->

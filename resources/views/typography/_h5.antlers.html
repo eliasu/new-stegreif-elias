@@ -1,0 +1,8 @@
+{{#
+	@name h5
+	@desc The typography h5 partial to render an h5 with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<!-- /typography/_h5.antlers.html -->
+<{{ as or 'h5' }} {{ class ?= "class='{class}'" }} {{ slot }}>{{ content | nl2br }}</{{ as or 'h5' }}>
+<!-- End: /typography/_h5.antlers.html -->

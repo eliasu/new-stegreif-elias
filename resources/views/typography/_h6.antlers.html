@@ -1,0 +1,8 @@
+{{#
+	@name h6
+	@desc The typography h6 partial to render an h6 with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<!-- /typography/_h6.antlers.html -->
+<{{ as or 'h6' }} {{ class ?= "class='{class}'" }} {{ slot }}>{{ content | nl2br }}</{{ as or 'h6' }}>
+<!-- End: /typography/_h6.antlers.html -->

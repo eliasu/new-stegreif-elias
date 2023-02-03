@@ -1,73 +1,45 @@
 {{#
-    @name Main desktop navigation
-    @desc The sites main desktop navigation rendered on each page. It's 2 levels deep by default and uses AlpineJS for interactivity.
+	@name Main desktop navigation
+	@desc The sites main desktop navigation rendered on each page. It's 2 levels deep by default and uses AlpineJS for interactivity.
 #}}
 
 <!-- /navigation/_main_desktop.antlers.html -->
-<nav class="hidden md:block" aria-label="{{ trans:strings.main_navigation }}">
-    <ul class="flex items-center space-x-8">
-        {{ nav:main max_depth="2" include_home="true" select="title|url" }}
-            <li
-                {{ if children }}
-                    x-data="{ subnavOpen: false }"
-                    @keyup.escape.stop.prevent="subnavOpen = false"
-                    @focusin.window="!$refs.subnav.contains($event.target) && (subnavOpen = false)"
+<nav class="justify-end hidden pointer-events-auto lg:flex lg:flex-wrap" aria-label="{{ trans:strings.main_navigation }}">
+    
+    <div class="flex items-center h-8 px-6 bg-light">
+        <ul class="flex items-center gap-[2vw] text-darkblue">
+            
+            {{# get all nav items #}}
+            {{ nav:main max_depth="1" include_home="false" select="title|url|is_current|is_parent|button" }}
+                {{ if button == false }}
+                    <li class="relative">
+                        <a class="text-lg leading-s block font-extrabold uppercase hover:text-yellow focus:outline-none focus-visible:ring-2 ring-primary whitespace-nowrap {{ is_current ? 'text-green' : 'text-darkblue' }} "href="{{ url }}">
+                            {{ title }}
+                        </a>
+                    </li>
                 {{ /if }}
-                class="relative leading-none"
-            >
+            {{ /nav:main }}
+        </ul>
+
+        {{# language picker #}}
+        <div class="flex gap-2 ml-8">
+            {{ locales all="true" self="true" current_first="false" }}
                 <a
-                    class="
-                        p-1 -m-1 flex items-center font-bold text-sm hover:text-primary focus:outline-none focus-visible:ring-2 ring-primary
-                        {{ is_current || is_parent
-                            ? 'text-primary'
-                            : 'text-neutral' }}
-                    "
-                    {{ if children }}
-                        href="#"
-                        @click.prevent="subnavOpen = !subnavOpen"
-                        :aria-label="subnavOpen
-                            ? '{{ trans:strings.subnav_close }}'
-                            : '{{ trans:strings.subnav_open }}'"
-                        :aria-expanded="subnavOpen"
-                    {{ else }}
-                        href="{{ url }}"
-                    {{ /if }}
+                    href="{{ permalink }}"
+                    aria-label="{{ locale:name }}"
+                    class="{{ is_current ?= "text-yellow" }} block px-1 py-2 -mx-1 text-xs font-bold tracking-wide uppercase whitespace-nowrap hover:text-green focus:outline-none focus-visible:ring-2 ring-primary"
                 >
-                    {{ title }}
-                    {{ if children }}
-                        <div :class="{ 'scale-y-[-1]': subnavOpen }" class="motion-safe:transition-transform">
-                            {{ svg:chevron_down class="w-2 ml-1 overflow-visible stroke-current text-neutral" aria-hidden="true" }}
-                        </div>
-                    {{ /if }}
+                    {{ locale:short }}
                 </a>
-                {{ if children }}
-                    <ul
-                        x-show="subnavOpen"
-                        x-ref="subnav"
-                        class="absolute right-0 mt-2 -ml-3 py-2 px-3 bg-white border border-neutral/10 rounded shadow"
-                        @click.outside="subnavOpen = false"
-                        x-transition
-                        x-cloak
-                    >
-                        {{ children }}
-                            <li class="">
-                                <a
-                                    class="
-                                        whitespace-nowrap py-2 px-1 -mx-1 block text-xs font-bold hover:text-primary focus:outline-none focus-visible:ring-2 ring-primary
-                                        {{ is_current || is_parent
-                                            ? 'text-primary'
-                                            : 'text-neutral' }}
-                                    "
-                                    href="{{ url }}"
-                                >
-                                    {{ title }}
-                                </a>
-                            </li>
-                        {{ /children }}
-                    </ul>
-                {{ /if }}
-            </li>
-        {{ /nav:main }}
-    </ul>
+            {{ /locales }}
+        </div>
+    </div>
+    
+    {{# nav items as cta's #}}
+    {{ nav:main max_depth="1" include_home="false" select="title|button|url" }}
+        {{ if button == true }}
+            {{ partial:components/button label="{{ title }}" button_type="background" link_type="url"}}
+        {{ /if }}
+    {{ /nav:main }}
 </nav>
 <!-- End: /navigation/_main_desktop.antlers.html -->

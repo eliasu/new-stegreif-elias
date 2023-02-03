@@ -1,0 +1,18 @@
+{{#
+	@name Section
+	@desc A section with bird transition if needed
+
+    @parameters:
+        color: dark/light/yellow
+
+#}}
+
+{{#  count the transition counter up #}}
+{{ transition_counter +=1 }} 
+{{ transition_counter = transition_counter | mod:6 }} 
+
+<!-- /layout/_section.antlers.html -->
+<section class="{{ color | ensure_left:"theme-" }} overflow-hidden relative flex flex-col gap-80 {{ select_transition_theme | ensure_right:"-section" }} {{ select_transition_theme | ensure_right:"-mask-{ transition_counter }" }}">
+    {{ slot }}
+</section>
+<!-- End: /layout/_section.antlers.html -->
