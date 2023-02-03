@@ -40,8 +40,7 @@ return [
     'widgets' => [
         [
             'type' => 'images_missing_alt',
-            'container' => 'images',
-            'filetypes' => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'bmp', 'tiff', 'svg'],
+            'container' => 'assets',
             'limit' => 5,
             'expiry' => 0,
             'width' => 50
@@ -50,13 +49,6 @@ return [
             'type' => 'collection',
             'collection' => 'pages',
             'width' => 50
-        ],
-        [
-            'type' => 'form',
-            'form' => 'contact',
-            'fields' => ['name', 'email'],
-            'limit' => '5',
-            'width' => 100
         ],
     ],
 

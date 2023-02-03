@@ -85,9 +85,8 @@ return [
         resource_path('users'),
         resource_path('preferences.yaml'),
         storage_path('forms'),
-        public_path('images'),
+        public_path('assets'),
         public_path('favicons'),
-        public_path('files'),
         public_path('social_images'),
     ],
 
