@@ -7,7 +7,6 @@
 // classes. Various aspects of the config are split inmultiple files.
 //
 
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   // The various configurable Tailwind configuration files.
   presets: [
@@ -16,11 +15,24 @@ module.exports = {
     require('./tailwind.config.peak.js'),
     require('./tailwind.config.site.js'),
   ],
-  // Configure files to scan for utility classes (JIT).
+  // Uncomment the next line to enable class based dark mode: https://peak.studio1902.nl/features/dark-mode.html.
+  // darkMode: 'class',
+  mode: 'jit',
+  // Configure Purge CSS.
   content: [
-    './resources/views/**/*.blade.php',
     './resources/views/**/*.html',
     './resources/js/**/*.js',
   ],
-  safelist: []
+  safelist: [
+    'sm:flex-row',
+    'sm:flex-row-reverse',
+    'text-2xl',
+    'leading-l',
+    'text-skin-primary',
+    {
+      pattern: /text-.+/,
+      pattern: /decoration-.+/,
+      pattern: /color-.+/,
+    },
+  ]
 }

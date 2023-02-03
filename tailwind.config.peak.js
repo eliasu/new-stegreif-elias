@@ -11,18 +11,6 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   theme: {
     extend: {
-      colors: {
-        current: 'currentColor',
-        transparent: 'transparent',
-        // Gray colors.
-        gray: colors.slate,
-        // Error styling colors.
-        red: colors.red,
-        // Notice styling colors.
-        yellow: colors.amber,
-        // Success styling colors.
-        green: colors.green,
-      },
       spacing: {
         // Used for the mobile navigation toggle.
         'safe': 'calc(env(safe-area-inset-bottom, 0rem) + 2rem)',
@@ -30,10 +18,19 @@ module.exports = {
       zIndex: {
         // Z-index stuff behind it's parent.
         'behind': '-1',
+        'nav': '500',
+        'front': '100',
+        '60': '60',
+        '70': '70',
+        '80': '80',
+        '90': '90',
       },
     },
   },
   plugins: [
+    // Use Tailwinds aspect-ratio plugin for embedded media: https://github.com/tailwindlabs/tailwindcss-aspect-ratio.
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/line-clamp'),
     // Use Tailwinds forms plugin for form styling: https://github.com/tailwindlabs/tailwindcss-forms
     require('@tailwindcss/forms')({
       strategy: 'base',
@@ -43,7 +40,7 @@ module.exports = {
         ':root': {
           // Fluid typography from 1 rem to 1.2 rem with fallback to 16px.
           fontSize: '100%',
-          'font-size': 'clamp(1rem, 1.6vw, 1.2rem)',
+          // 'font-size': 'clamp(1rem, 1.6vw, 1.05rem)',
           // Safari resize fix.
           minHeight: '0vw',
         },
@@ -80,8 +77,7 @@ module.exports = {
             gridColumnStart: '3',
           },
           '.size-xl': {
-            gridColumn: 'span 10 / span 10',
-            gridColumnStart: '2',
+            gridColumn: 'span 12 / span 12',
           },
         },
         '@media screen(lg)': {
@@ -96,13 +92,12 @@ module.exports = {
             gridColumnStart: '3',
           },
           '.size-xl': {
-            gridColumn: 'span 10 / span 10',
-            gridColumnStart: '2',
+            gridColumn: 'span 12 / span 12',
           },
         },
       })
     }),
-
+  
     // Render screen names in the breakpoint display.
     plugin(function({ addBase, theme}) {
       const breakpoints = Object.entries(theme('screens'))
@@ -120,7 +115,6 @@ module.exports = {
           }
         }
       )
-
       addBase(breakpoints)
     }),
 
@@ -129,12 +123,12 @@ module.exports = {
         // The main wrapper for all sections on our website. Has a max width and is centered.
         '.fluid-container': {
           width: '100%',
-          maxWidth: theme('screens.xl'),
+          maxWidth: theme('screens.2xl'),
           marginLeft: 'auto',
           marginRight: 'auto',
           // Use safe-area-inset together with default padding for Apple devices with a notch.
-          paddingLeft: `calc(env(safe-area-inset-left, 0rem) + ${theme('padding.8')})`,
-          paddingRight: `calc(env(safe-area-inset-right, 0rem) + ${theme('padding.8')})`,
+          paddingLeft: `calc(env(safe-area-inset-left, 0rem) + ${theme('padding.4')})`,
+          paddingRight: `calc(env(safe-area-inset-right, 0rem) + ${theme('padding.4')})`,
         },
         // The outer grid where all block builder blocks are a child of. Spreads out all blocks
         // vertically with a uniform space between them.
@@ -166,8 +160,8 @@ module.exports = {
           // Larger horizontal padding on larger screens.
           '.fluid-container': {
             // Use safe-area-inset together with default padding for Apple devices with a notch.
-            paddingLeft: `calc(env(safe-area-inset-left, 0rem) + ${theme('padding.12')})`,
-            paddingRight: `calc(env(safe-area-inset-right, 0rem) + ${theme('padding.12')})`,
+            paddingLeft: `calc(env(safe-area-inset-left, 0rem) + ${theme('padding.20')})`,
+            paddingRight: `calc(env(safe-area-inset-right, 0rem) + ${theme('padding.20')})`,
           },
           // Larger vertical spacing between blocks on larger screens.
           '.outer-grid': {
