@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd14fc777dd90b9748d523d20f4da5a5",
+    "content-hash": "e1dff0d2b6c928579047c7706b00031b",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -5179,6 +5179,74 @@
             "time": "2022-05-04T18:41:52+00:00"
         },
         {
+            "name": "stillat/relationships",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stillat/relationships.git",
+                "reference": "36b2e6abe19a9daadc651d0e57a62e5457c91f74"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stillat/relationships/zipball/36b2e6abe19a9daadc651d0e57a62e5457c91f74",
+                "reference": "36b2e6abe19a9daadc651d0e57a62e5457c91f74",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0",
+                "statamic/cms": "^3.3.21"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2.3",
+                "orchestra/testbench": "^6.7.0 || ^7.0"
+            },
+            "type": "statamic-addon",
+            "extra": {
+                "statamic": {
+                    "name": "Relationships",
+                    "description": "Relationships addon"
+                },
+                "laravel": {
+                    "providers": [
+                        "Stillat\\Relationships\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stillat\\Relationships\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Koster",
+                    "email": "john@stillat.com",
+                    "homepage": "https://stillat.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides bi-directional entry relationship automation",
+            "keywords": [
+                "entries",
+                "statamic"
+            ],
+            "support": {
+                "issues": "https://github.com/Stillat/relationships/issues",
+                "source": "https://github.com/Stillat/relationships/tree/v1.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/JohnathonKoster",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-11-19T16:01:37+00:00"
+        },
+        {
             "name": "studio1902/statamic-peak-commands",
             "version": "v1.17",
             "source": {
@@ -9577,16 +9645,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.0",
+            "version": "9.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "70fc8be1d0b9fad56a199a4df5f9cfabfc246f84"
+                "reference": "9a52e8385f3e432d7e8ecab72c4d211a67223285"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/70fc8be1d0b9fad56a199a4df5f9cfabfc246f84",
-                "reference": "70fc8be1d0b9fad56a199a4df5f9cfabfc246f84",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9a52e8385f3e432d7e8ecab72c4d211a67223285",
+                "reference": "9a52e8385f3e432d7e8ecab72c4d211a67223285",
                 "shasum": ""
             },
             "require": {
@@ -9659,7 +9727,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.0"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.1"
             },
             "funding": [
                 {
@@ -9675,7 +9743,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-03T07:32:24+00:00"
+            "time": "2023-02-03T19:31:30+00:00"
         },
         {
             "name": "sebastian/cli-parser",
