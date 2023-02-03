@@ -1,5 +1,5 @@
 name: 🖥️ Dev Deploy Website to All-Inkl 0.1
-#gfadgfsd
+#gfa
 on:
   push:
     branches:
