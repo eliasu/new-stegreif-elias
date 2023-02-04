@@ -3,7 +3,7 @@ import collapse from '@alpinejs/collapse'
 import persist from '@alpinejs/persist'
 import focus from '@alpinejs/focus'
 import 'focus-visible'
-import YouTubeToHtml5 from '@thelevicole/youtube-to-html5-loader'
+import '@thelevicole/youtube-to-html5-loader'
 import Plyr from 'plyr';
 
 let logo_visible = (window.pageYOffset > 200) ? true : false;
